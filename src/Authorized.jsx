@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom"
-// import { NavBar } from "./navbar/NavBar.jsx"
+import { NavBar } from "./assets/components/NavBar.jsx"
 
 export const Authorized = () => {
   if (localStorage.getItem("hookd_token")) {
     return (
       <>
-        {/* <NavBar /> */}
+        <NavBar />
         <main className="p-4">
           <Outlet />
         </main>

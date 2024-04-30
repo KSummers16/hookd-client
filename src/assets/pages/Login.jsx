@@ -21,6 +21,7 @@ export const Login = () => {
       .then((authInfo) => {
         if (authInfo.valid) {
           localStorage.setItem("hookd_token", JSON.stringify(authInfo))
+          localStorage.setItem("id", JSON.stringify)
           navigate("/")
         } else {
           existDialog.current.showModal()
