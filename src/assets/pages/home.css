@@ -1,0 +1,44 @@
+.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f0f0f0; /* Add your desired background color */
+  padding: 20px; /* Add padding as needed */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logo {
+  width: 175px;
+  height: auto;
+}
+
+.shoppingbody {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.rts-select {
+  border: pink solid 2px;
+  width: 50%;
+  margin: 20px;
+  padding: 5px;
+}
+
+.cus-select {
+  border: pink solid 2px;
+  width: 50%;
+  margin: 20px;
+  padding: 5px;
+}
+
+.rtsbutton {
+  width: 50%;
+}
+
+.cusbutton {
+  width: 50%;
+}
