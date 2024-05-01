@@ -9,6 +9,7 @@ import { Login } from "./assets/pages/Login.jsx"
 import { Register } from "./assets/pages/register.jsx"
 import { RTSDetails } from "./assets/pages/rtsdetails.jsx"
 import { CusDetails } from "./assets/pages/cusdetails.jsx"
+import { MyCart } from "./assets/pages/cart.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
@@ -24,7 +25,11 @@ function App() {
             <Route path="/rtsproducts" element={<RTSProducts />} />
             <Route path="/cusproducts" element={<CusProducts />} />
             <Route path="/rtsproducts/:id" element={<RTSDetails />} />
-            <Route path="/cusproducts/:id" element={<CusDetails />} />
+            <Route
+              path="/cusproducts/:id"
+              element={<CusDetails currentUser={currentUser} />}
+            />
+            <Route path="/cart" element={<MyCart />} />
           </Route>
         </Routes>
       </BrowserRouter>

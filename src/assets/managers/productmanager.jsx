@@ -78,3 +78,38 @@ export const addCusToOrder = (request) => {
     body: JSON.stringify(request),
   })
 }
+
+export const getAllCart = () => {
+  return fetch(`http://localhost:8000/cart`, {
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
+export const deleteCart = () => {
+  return fetch(`http://localhost:8000/cart/clear-cart`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json,",
+    },
+  }).then((res) => res.json())
+}
+
+export const removeProductFromOrder = (id) => {
+  return fetch(`http://localhost:8000/cartitem/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  })
+}

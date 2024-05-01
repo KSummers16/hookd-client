@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { addCusToOrder, getCusById } from "../managers/productmanager.jsx"
+import { getCusById } from "../managers/productmanager.jsx"
+import { NewCusRequest } from "../components/customrequest.jsx"
 
-export const CusDetails = () => {
+export const CusDetails = ({ currentUser }) => {
   const { id } = useParams()
   const [product, setProduct] = useState({})
-
-  const addToCart = (productId) => {
-    addCusToOrder({ cusproduct_id: productId }).then(() => {
-      alert("Product added to cart!")
-    })
-  }
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
     getCusById(id).then((productData) => {
@@ -29,7 +25,10 @@ export const CusDetails = () => {
       <p>{product.description}</p>
       <p>Pattern by: {product.pattern}</p>
       <p>Made with: {product.yarn}</p>
-      <button onClick={(event) => addToCart(product.id)}>Add to Cart</button>
+      <button onClick={() => setShowForm(true)}>Add Custom Request</button>
+      {showForm && (
+        <NewCusRequest currentUser={currentUser} productId={product.id} />
+      )}
     </div>
   )
 }
