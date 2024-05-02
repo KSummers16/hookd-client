@@ -99,7 +99,13 @@ export const deleteCart = () => {
       }`,
       "Content-Type": "application/json,",
     },
-  }).then((res) => res.json())
+  }).then((res) => {
+    if (res.status === 204) {
+      return
+    } else {
+      return res.json()
+    }
+  })
 }
 
 export const removeProductFromOrder = (id) => {

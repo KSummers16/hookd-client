@@ -35,6 +35,13 @@ export const CusProducts = () => {
   return (
     <>
       <h2>Custom Products</h2>
+      <h3>
+        Design your dream crochet creation with our customizable options. Choose
+        your favorite colors, styles, and details to create a truly
+        one-of-a-kind piece that reflects your unique personality and
+        preferences. Let your imagination run wild as we bring your vision to
+        life stitch by stitch.
+      </h3>
       <div className="filter-btn">
         <button onClick={() => setSelectedCategory("Stuffies")}>
           Stuffies

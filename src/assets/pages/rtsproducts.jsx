@@ -37,6 +37,12 @@ export const RTSProducts = () => {
   return (
     <>
       <h2>RTS Products</h2>
+      <h3>
+        Explore our curated collection of handcrafted crochet creations,
+        meticulously crafted and ready to ship straight to your doorstep. From
+        adorable amigurumi to cozy blankets, find the perfect piece to add a
+        touch of handmade charm to your life.
+      </h3>
       <div className="filter-btn">
         <button onClick={() => setSelectedCategory("Stuffies")}>
           Stuffies
@@ -61,7 +67,7 @@ export const RTSProducts = () => {
                   <b>{product.name}</b>
                 </div>
                 <div>${product.price}</div>
-                <div>{product.description}</div>
+
                 <div>Pattern by: {product.pattern}</div>
                 <div>Made with: {product.yarn}</div>
               </Link>

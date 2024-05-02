@@ -6,6 +6,7 @@ export const NewCusRequest = ({ currentUser }) => {
   const [colorOptions, setColorOptions] = useState([])
   const [successMessage, setSuccessMessage] = useState("")
   const [eyeOptions, setEyeOptions] = useState([])
+  const [product, setProduct] = useState(null)
   const [request, setRequest] = useState({
     cusproduct_id: parseInt(id, 10),
     eyes_id: "",
@@ -13,6 +14,7 @@ export const NewCusRequest = ({ currentUser }) => {
     color2_id: "",
     customer_id: currentUser.id,
   })
+  const [showForm, setShowForm] = useState(true)
 
   useEffect(() => {
     const fetchOptions = () => {
@@ -25,65 +27,17 @@ export const NewCusRequest = ({ currentUser }) => {
         .then((response) => response.json())
         .then((data) => setColorOptions(data))
 
-      fetch(`http://localHost:8000/cusproducts/${id}`, {
+      fetch(`http://localHost:8000/eyes`, {
         headers: {
           Authorization: `Token ${token}`,
         },
       })
         .then((response) => response.json())
-        .then((product) => {
-          if (product.hasEyes) {
-            fetch(`http://localHost:8000/eyes`, {
-              headers: {
-                Authorization: `Token ${token}`,
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => setEyeOptions(data))
-          }
-        })
+        .then((data) => setEyeOptions(data))
     }
     fetchOptions()
   }, [id])
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault()
-  //     const requestData = { ...request }
-  //     request.cusproductId =
-  //       requestData.productId !== "" ? parseInt(requestData.productId, 10) : null
-  //     requestData.eyesId =
-  //       requestData.eyesId !== "" ? parseInt(requestData.eyesId, 10) : null
-  //     requestData.color1Id =
-  //       requestData.color1Id !== "" ? parseInt(requestData.color1Id, 10) : null
-  //     requestData.color2Id =
-  //       requestData.color2Id !== "" ? parseInt(requestData.color2Id, 10) : null
-
-  //     const token = currentUser.token
-
-  //     if (requestData.color2Id === "") {
-  //       requestData.color2Id = null
-  //     }
-  //     fetch(`http://localHost:8000/cart`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Token ${token}`,
-  //       },
-  //       body: JSON.stringify(requestData),
-  //     })
-  //       .then((response) => {
-  //         if (response.ok) {
-  //           return response.json()
-  //         } else {
-  //           throw new Error("Failed to submit request")
-  //         }
-  //       })
-  //       .then((data) => {
-  //         setSuccessMessage("Request submitted successfully")
-
-  //         setRequest({ cusproductId: id, eyesId: "", color1Id: "", color2Id: "" })
-  //       })
-  //   }
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -132,20 +86,17 @@ export const NewCusRequest = ({ currentUser }) => {
           color2_id: "",
         })
       })
-      .catch((error) => {
-        console.error("Error submitting request:", error)
-        // Handle error if necessary
-      })
+    setShowForm(false)
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        {eyeOptions.length > 0 && (
+      {showForm && (
+        <form onSubmit={handleSubmit}>
           <label>
             Eyes:
             <select
-              value={request.eyesId}
+              value={request.eyes_id}
               onChange={(e) =>
                 setRequest({ ...request, eyes_id: e.target.value })
               }
@@ -158,41 +109,41 @@ export const NewCusRequest = ({ currentUser }) => {
               ))}
             </select>
           </label>
-        )}
-        <label>
-          Color 1:
-          <select
-            value={request.color1Id}
-            onChange={(e) =>
-              setRequest({ ...request, color1_id: e.target.value })
-            }
-          >
-            <option value="">Select First Color</option>
-            {colorOptions.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Color 2:
-          <select
-            value={request.color2Id}
-            onChange={(e) =>
-              setRequest({ ...request, color2_id: e.target.value })
-            }
-          >
-            <option value="">Select Second Color</option>
-            {colorOptions.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button type="submit">Submit Request</button>
-      </form>
+          <label>
+            Color 1:
+            <select
+              value={request.color1Id}
+              onChange={(e) =>
+                setRequest({ ...request, color1_id: e.target.value })
+              }
+            >
+              <option value="">Select First Color</option>
+              {colorOptions.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Color 2:
+            <select
+              value={request.color2_id}
+              onChange={(e) =>
+                setRequest({ ...request, color2_id: e.target.value })
+              }
+            >
+              <option value="">Choose Second Color</option>
+              {colorOptions.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="submit">Submit Request</button>
+        </form>
+      )}
     </>
   )
 }

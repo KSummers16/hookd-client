@@ -22,7 +22,7 @@ export const NavBar = () => {
           className="dropdown-btn"
           onClick={() => setShowDropdown(!showDropdown)}
         >
-          User
+          My Options
         </button>
         {/* Dropdown menu */}
         {showDropdown && (
@@ -31,8 +31,8 @@ export const NavBar = () => {
               <Link to="/cart">Cart</Link>
             </li>
             {/* <li className="dropdown-item">
-              <Link to={`/profile/${currentUser.id}`}>Profile</Link>
-            </li> */}
+                <Link to={`/profile/${currentUser.id}`}>Profile</Link>
+              </li> */}
             <li className="dropdown-item" onClick={handleLogout}>
               Logout
             </li>

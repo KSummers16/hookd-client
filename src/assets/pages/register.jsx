@@ -7,6 +7,7 @@ export const Register = () => {
   const [password, setPassword] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
+  const [address, setAddress] = useState("")
   const existDialog = useRef()
   const navigate = useNavigate()
 
@@ -17,6 +18,7 @@ export const Register = () => {
       body: JSON.stringify({
         email,
         password,
+        address,
         first_name: firstName,
         last_name: lastName,
       }),
@@ -75,6 +77,17 @@ export const Register = () => {
               placeholder=""
               required
               autoFocus
+            />
+          </fieldset>
+          <fieldset className="mb-4">
+            <label htmlFor="inputPassword"> Address </label>
+            <input
+              type="password"
+              id="inputPassword"
+              value={address}
+              onChange={(evt) => setAddress(evt.target.value)}
+              className="form-control"
+              placeholder="Address"
             />
           </fieldset>
           <fieldset className="mb-4">
