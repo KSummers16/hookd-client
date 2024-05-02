@@ -1,0 +1,13 @@
+.products-show {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border: solid 5px black;
+  margin: 10px;
+  width: 250px;
+}
