@@ -31,6 +31,17 @@ export const getAllCategories = () => {
   }).then((res) => res.json())
 }
 
+export const getAllCart = () => {
+  return fetch(`http://localhost:8000/cart`, {
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
 export const getRTSbyId = (id) => {
   return fetch(`http://localhost:8000/rtsproducts/${id}`, {
     headers: {
@@ -79,17 +90,6 @@ export const addCusToOrder = (request) => {
   })
 }
 
-export const getAllCart = () => {
-  return fetch(`http://localhost:8000/cart`, {
-    headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
-      "Content-Type": "application/json",
-    },
-  }).then((res) => res.json())
-}
-
 export const deleteCart = () => {
   return fetch(`http://localhost:8000/cart/clear-cart`, {
     method: "DELETE",
@@ -118,4 +118,17 @@ export const removeProductFromOrder = (id) => {
       "Content-Type": "application/json",
     },
   })
+}
+
+export const getCustomerById = (id) => {
+  return fetch(`http://localhost:8000/customer/${id}`, {
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => data)
 }

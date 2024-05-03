@@ -13,7 +13,7 @@ export const MyCart = () => {
       if (cartData) {
         setCart(cartData.order_products)
       } else {
-        setCart([])
+        setCart({})
       }
     })
   }, [])

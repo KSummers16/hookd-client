@@ -10,6 +10,7 @@ import { Register } from "./assets/pages/register.jsx"
 import { RTSDetails } from "./assets/pages/rtsdetails.jsx"
 import { CusDetails } from "./assets/pages/cusdetails.jsx"
 import { MyCart } from "./assets/pages/cart.jsx"
+import { UserProfile } from "./assets/pages/profile.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
@@ -20,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route element={<Authorized />}>
+          <Route element={<Authorized currentUser={currentUser} />}>
             <Route path="/" element={<Home />} />
             <Route path="/rtsproducts" element={<RTSProducts />} />
             <Route path="/cusproducts" element={<CusProducts />} />
@@ -29,7 +30,11 @@ function App() {
               path="/cusproducts/:id"
               element={<CusDetails currentUser={currentUser} />}
             />
-            <Route path="/cart" element={<MyCart />} />
+            <Route path="/cart" element={<MyCart />} />\
+            <Route
+              path="/user"
+              element={<UserProfile currentUser={currentUser} />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

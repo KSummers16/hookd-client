@@ -66,6 +66,9 @@ export const RTSProducts = () => {
                 <div>
                   <b>{product.name}</b>
                 </div>
+                {product.image && (
+                  <img src={`${product.image}`} alt={product.name} />
+                )}
                 <div>${product.price}</div>
 
                 <div>Pattern by: {product.pattern}</div>
