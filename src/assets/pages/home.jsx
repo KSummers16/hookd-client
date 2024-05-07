@@ -6,24 +6,29 @@ export const Home = () => {
     <>
       <div className="banner">
         <h1 className="welcome">Welcome to Hook'd by Kim</h1>
-        <img
-          className="logo"
-          src="/images/HookdLogo.png"
-          alt="Hook'd by Kim Logo"
-        />
       </div>
 
       <section className="shoppingbody">
         <div className="rts-select">
-          <h3>Ready To Sell Items!</h3>
+          <h3>Ready To Ship Items!</h3>
           <Link to="/rtsproducts">
-            <button className="rtsbutton">Shop Now</button>
+            <img
+              className="ReadyToSell"
+              src="https://res.cloudinary.com/yarn-stash/image/upload/v1715009425/IMG_1572_s7asxs.jpg"
+              alt="RTS"
+            />
+            <div>Shop Now!</div>
           </Link>
         </div>
         <div className="cus-select">
           <h3>Custom Products!</h3>
           <Link to="/cusproducts">
-            <button className="cusbutton">Shop Now</button>
+            <img
+              className="Customize"
+              src="https://res.cloudinary.com/yarn-stash/image/upload/v1715009840/IMG_1573_cy0plu.jpg"
+              alt="Customize"
+            />
+            <div>Shop Now!</div>
           </Link>
         </div>
       </section>

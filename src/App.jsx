@@ -11,6 +11,7 @@ import { RTSDetails } from "./assets/pages/rtsdetails.jsx"
 import { CusDetails } from "./assets/pages/cusdetails.jsx"
 import { MyCart } from "./assets/pages/cart.jsx"
 import { UserProfile } from "./assets/pages/profile.jsx"
+import { Admin } from "./assets/pages/admin.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
@@ -30,11 +31,16 @@ function App() {
               path="/cusproducts/:id"
               element={<CusDetails currentUser={currentUser} />}
             />
-            <Route path="/cart" element={<MyCart />} />\
+            <Route
+              path="/cart"
+              element={<MyCart currentUser={currentUser} />}
+            />
+            \
             <Route
               path="/user"
               element={<UserProfile currentUser={currentUser} />}
             />
+            <Route path="/admin" element={<Admin />} />
           </Route>
         </Routes>
       </BrowserRouter>

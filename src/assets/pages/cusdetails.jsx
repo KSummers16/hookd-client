@@ -19,16 +19,44 @@ export const CusDetails = ({ currentUser }) => {
   }
 
   return (
+    // <div>
+    //   <h2>{product.name}</h2>
+    //   <p>${product.price}</p>
+    //   <p>{product.description}</p>
+    //   <p>Pattern by: {product.pattern}</p>
+    //   <p>Made with: {product.yarn}</p>
+    //   <button onClick={() => setShowForm(true)}>Add Custom Request</button>
+    //   {showForm && (
+    //     <NewCusRequest currentUser={currentUser} productId={product.id} />
+    //   )}
+    // </div>
     <div>
       <h2>{product.name}</h2>
-      <p>${product.price}</p>
-      <p>{product.description}</p>
-      <p>Pattern by: {product.pattern}</p>
-      <p>Made with: {product.yarn}</p>
-      <button onClick={() => setShowForm(true)}>Add Custom Request</button>
-      {showForm && (
-        <NewCusRequest currentUser={currentUser} productId={product.id} />
-      )}
+      <div className="itemdetails">
+        <div>
+          {product.image && (
+            <img
+              className="rtsdetailimage"
+              src={product.image}
+              alt={product.name}
+            />
+          )}
+        </div>
+        <div className="product-details">
+          <p className="price">${product.price}</p>
+          <p>{product.description}</p>
+          <p>
+            <b>Pattern by:</b> {product.pattern}
+          </p>
+          <p>
+            <b>Made with:</b> {product.yarn}
+          </p>
+          <button onClick={() => setShowForm(true)}>Add Custom Request</button>
+          {showForm && (
+            <NewCusRequest currentUser={currentUser} productId={product.id} />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

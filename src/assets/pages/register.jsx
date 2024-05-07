@@ -80,10 +80,10 @@ export const Register = () => {
             />
           </fieldset>
           <fieldset className="mb-4">
-            <label htmlFor="inputPassword"> Address </label>
+            <label htmlFor="inputAddress"> Address </label>
             <input
-              type="password"
-              id="inputPassword"
+              type="address"
+              id="inputAddress"
               value={address}
               onChange={(evt) => setAddress(evt.target.value)}
               className="form-control"

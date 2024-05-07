@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { fetchColors, fetchEyes } from "../managers/productmanager.jsx"
 
 export const NewCusRequest = ({ currentUser }) => {
   const { id } = useParams()
@@ -16,24 +17,36 @@ export const NewCusRequest = ({ currentUser }) => {
   })
   const [showForm, setShowForm] = useState(true)
 
+  // useEffect(() => {
+  //   const fetchOptions = () => {
+  //     const token = currentUser.token
+  //     fetch(`http://localHost:8000/colors`, {
+  //       headers: {
+  //         Authorization: `Token ${token}`,
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => setColorOptions(data))
+
+  //     fetch(`http://localHost:8000/eyes`, {
+  //       headers: {
+  //         Authorization: `Token ${token}`,
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => setEyeOptions(data))
+  //   }
+  //   fetchOptions()
+  // }, [id])
+
   useEffect(() => {
     const fetchOptions = () => {
-      const token = currentUser.token
-      fetch(`http://localHost:8000/colors`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
+      fetchColors().then((colorData) => {
+        setColorOptions(colorData)
       })
-        .then((response) => response.json())
-        .then((data) => setColorOptions(data))
-
-      fetch(`http://localHost:8000/eyes`, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
+      fetchEyes().then((eyeData) => {
+        setEyeOptions(eyeData)
       })
-        .then((response) => response.json())
-        .then((data) => setEyeOptions(data))
     }
     fetchOptions()
   }, [id])

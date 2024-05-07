@@ -33,41 +33,51 @@ export const NavBar = ({ currentUser }) => {
   }, [currentUser])
 
   return (
-    <ul className="navbar">
-      <li className="navbar-item">
-        <Link to="/">Home</Link>
-      </li>
-      <li className="navbar-item">
-        <Link to="/rtsproducts">RTS Items</Link>
-      </li>
-      <li className="navbar-item">
-        <Link to="/cusproducts">Custom Items</Link>
-      </li>
-      <li className="navbar-item">
-        {/* Dropdown trigger button */}
-        <button
-          className="dropdown-btn"
-          onClick={() => setShowDropdown(!showDropdown)}
-        >
-          My Options
-        </button>
-        {/* Dropdown menu */}
-        {isDataFetched && showDropdown && (
-          <ul className="dropdown-menu">
-            <li className="dropdown-item">
-              <Link to="/cart">Cart</Link>
-            </li>
-            {isAdmin && (
+    <>
+      <ul className="navbar">
+        <li className="navbar-item">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/rtsproducts">RTS Items</Link>
+        </li>
+        <li className="navbar-item">
+          <Link to="/cusproducts">Custom Items</Link>
+        </li>
+        <li className="navbar-item">
+          {/* Dropdown trigger button */}
+          <button
+            className="dropdown-btn"
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            My Options
+          </button>
+          {/* Dropdown menu */}
+          {isDataFetched && showDropdown && (
+            <ul className="dropdown-menu">
               <li className="dropdown-item">
-                <Link to="/admin">Admin Panel</Link>
+                <Link to="/cart">Cart</Link>
               </li>
-            )}
-            <li className="dropdown-item" onClick={handleLogout}>
-              Logout
-            </li>
-          </ul>
-        )}
-      </li>
-    </ul>
+              <li>
+                <Link to="/user">Profile</Link>
+              </li>
+              {isAdmin && (
+                <li className="dropdown-item">
+                  <Link to="/admin">Admin Panel</Link>
+                </li>
+              )}
+              <li className="dropdown-item" onClick={handleLogout}>
+                Logout
+              </li>
+            </ul>
+          )}
+        </li>
+        <img
+          className="logo"
+          src="/images/HookdLogo.png"
+          alt="Hook'd by Kim Logo"
+        />
+      </ul>
+    </>
   )
 }

@@ -60,14 +60,19 @@ export const RTSProducts = () => {
       </div>
       <div className="products-show">
         {filteredProducts.map((product) => {
+          console.log(product)
           return (
             <div className="products" key={product.id}>
               <Link to={`/rtsproducts/${product.id}`}>
                 <div>
-                  <b>{product.name}</b>
+                  <b className="product-title">{product.name}</b>
                 </div>
                 {product.image && (
-                  <img src={`${product.image}`} alt={product.name} />
+                  <img
+                    className="rtsimage"
+                    src={product.image}
+                    alt={product.name}
+                  />
                 )}
                 <div>${product.price}</div>
 

@@ -3,6 +3,11 @@
   flex-wrap: wrap;
 }
 
+.itemdetails {
+  display: flex;
+  align-items: center;
+}
+
 .products {
   display: flex;
   flex-direction: row;
@@ -10,4 +15,27 @@
   border: solid 5px black;
   margin: 10px;
   width: 250px;
+}
+
+.rtsimage {
+  width: 175px;
+  height: auto;
+}
+
+.rtsdetailimage {
+  width: 450px;
+  height: auto;
+}
+
+.product-title {
+  font-size: xx-large;
+}
+
+.product-details {
+  margin: 5px;
+  width: 550px;
+}
+
+.price {
+  font-size: xx-large;
 }

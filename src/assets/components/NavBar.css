@@ -8,6 +8,7 @@
   font-family: "Single Day";
   font-size: x-large;
   justify-content: space-around;
+  align-items: center;
 }
 
 .navbar-item {
@@ -21,4 +22,9 @@
 
 .navbar-link:hover {
   color: var(--primary);
+}
+
+.logo {
+  width: 125px;
+  height: auto;
 }

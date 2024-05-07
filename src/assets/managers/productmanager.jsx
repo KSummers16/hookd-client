@@ -9,6 +9,28 @@ export const getAllRTS = () => {
   }).then((res) => res.json())
 }
 
+export const fetchColors = () => {
+  return fetch(`http://localhost:8000/colors`, {
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
+export const fetchEyes = () => {
+  return fetch(`http://localhost:8000/eyes`, {
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
 export const getAllCus = () => {
   return fetch(`http://localhost:8000/cusproducts`, {
     headers: {
@@ -131,4 +153,16 @@ export const getCustomerById = (id) => {
   })
     .then((response) => response.json())
     .then((data) => data)
+}
+
+export const addNewRtsProd = () => {
+  return fetch(`http://localhost:8000/rtsproducts`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  })
 }

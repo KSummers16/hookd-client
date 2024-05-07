@@ -1,0 +1,34 @@
+.mycart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cartitems-container {
+  flex: 1;
+}
+
+.thumbnail {
+  width: 75px;
+  height: auto;
+  margin: 20px;
+}
+
+.cartitems {
+  width: 100%;
+  display: flex;
+  margin: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete {
+  margin: 20px;
+}
+
+.user-info {
+  margin-left: 200px;
+  /* Remove the float rule */
+  /* float: right; */
+}

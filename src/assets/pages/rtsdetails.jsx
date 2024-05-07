@@ -25,11 +25,30 @@ export const RTSDetails = () => {
   return (
     <div>
       <h2>{product.name}</h2>
-      <p>${product.price}</p>
-      <p>{product.description}</p>
-      <p>Pattern by: {product.pattern}</p>
-      <p>Made with: {product.yarn}</p>
-      <button onClick={(event) => addToCart(product.id)}>Add to Cart</button>
+      <div className="itemdetails">
+        <div>
+          {product.image && (
+            <img
+              className="rtsdetailimage"
+              src={product.image}
+              alt={product.name}
+            />
+          )}
+        </div>
+        <div className="product-details">
+          <p className="price">${product.price}</p>
+          <p>{product.description}</p>
+          <p>
+            <b>Pattern by:</b> {product.pattern}
+          </p>
+          <p>
+            <b>Made with:</b> {product.yarn}
+          </p>
+          <button onClick={(event) => addToCart(product.id)}>
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
