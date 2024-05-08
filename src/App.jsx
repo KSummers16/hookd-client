@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from "react"
-import { loadStripe } from "@stripe/stripe-js"
-import {
-  EmbeddedCheckoutProvider,
-  EmbeddedCheckout,
-} from "@stripe/react-stripe-js"
+// import { useState, useEffect, useCallback } from "react"
+// import { loadStripe } from "@stripe/stripe-js"
+// import {
+//   EmbeddedCheckoutProvider,
+//   EmbeddedCheckout,
+// } from "@stripe/react-stripe-js"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { Home } from "./assets/pages/home.jsx"
 import { RTSProducts } from "./assets/pages/rtsproducts.jsx"
@@ -18,6 +18,7 @@ import { MyCart } from "./assets/pages/cart.jsx"
 import { UserProfile } from "./assets/pages/profile.jsx"
 import { Admin } from "./assets/pages/admin.jsx"
 import { AboutKim } from "./assets/pages/aboutKim.jsx"
+import { Delete } from "./assets/components/deleteproduct.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
@@ -48,6 +49,7 @@ function App() {
             />
             <Route path="/admin" element={<Admin />} />
             <Route path="/aboutkim" element={<AboutKim />} />
+            <Route path="/delete" element={<Delete />} />
             {/* <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/return" element={<Return />} /> */}
           </Route>

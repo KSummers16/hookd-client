@@ -1,0 +1,33 @@
+.deleteproducts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.rts {
+  width: 400px;
+  border: 1px #44edf4;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px;
+  align-items: center;
+}
+
+.cus {
+  width: 400px;
+  border: 1px #44edf4;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-left: 5px;
+  padding: 20px;
+}
+
+.drts {
+  display: flex;
+  align-items: center;
+}

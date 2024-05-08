@@ -43,19 +43,33 @@ export const CusProducts = () => {
         life stitch by stitch.
       </h3>
       <div className="filter-btn">
-        <button onClick={() => setSelectedCategory("Stuffies")}>
+        <button className="product-btn" onClick={() => setSelectedCategory("")}>
+          Show All
+        </button>
+        <button
+          className="product-btn"
+          onClick={() => setSelectedCategory("Stuffies")}
+        >
           Stuffies
         </button>
-        <button onClick={() => setSelectedCategory("Accessories")}>
+        <button
+          className="product-btn"
+          onClick={() => setSelectedCategory("Accessories")}
+        >
           Accessories
         </button>
-        <button onClick={() => setSelectedCategory("Food Accessories")}>
+        <button
+          className="product-btn"
+          onClick={() => setSelectedCategory("Food Accessories")}
+        >
           Food Accessories
         </button>
-        <button onClick={() => setSelectedCategory("Home Decor")}>
+        <button
+          className="product-btn"
+          onClick={() => setSelectedCategory("Home Decor")}
+        >
           Home Decor
         </button>
-        <button onClick={() => setSelectedCategory("")}>Show All</button>
       </div>
       <div className="products-show">
         {filteredProducts.map((product) => {

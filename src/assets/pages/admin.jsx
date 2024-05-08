@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { AddNewRTS } from "../components/newrtsproduct.jsx"
 import { AddNewCus } from "../components/newcusproduct.jsx"
 
@@ -26,6 +27,9 @@ export const Admin = () => {
       {showForm === "addNewCus" && (
         <AddNewCus onCloseForm={() => toggleForm("addNewCus")} />
       )}
+      <Link to="/delete">
+        <button>Delete Product Page</button>
+      </Link>
     </>
   )
 }

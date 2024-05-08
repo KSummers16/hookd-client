@@ -1,0 +1,29 @@
+.profile-box {
+  display: flex;
+  width: 100%;
+}
+
+.profile-section {
+  display: flex;
+  width: 50%;
+  margin: 20px;
+  border: solid 5px #44edf4;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.user-name {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.user-email {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.user-address {
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   flex-wrap: nowrap;
-  background-color: lightcoral;
+  background-color: #44edf4;
   margin: 0;
   width: 100%;
   padding: 0.5rem;
@@ -14,6 +14,31 @@
 .navbar-item {
   flex-basis: 20%;
   list-style-type: none;
+  color: black;
+  font-size: 22px;
+  line-height: 22px;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  background-image: linear-gradient(
+    to right,
+    rgb(46, 159, 164) 0%,
+    rgb(62, 203, 192) 50%,
+    rgb(20, 78, 117) 100%
+  );
+  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
+}
+
+.navbar-item a {
+  color: black; /* Set the color to black */
+  text-decoration: none; /* Remove underline */
 }
 
 .navbar-logout {
@@ -28,4 +53,69 @@
   width: 125px;
   height: auto;
   margin-left: 20px;
+}
+
+.hamburger-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1px;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin-bottom: 5px;
+  background-color: #000;
+  border-radius: 3px;
+}
+
+.dropdown-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* Ensures the text doesn't interfere with button click */
+}
+
+.hamburger-btn.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-btn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.dropdown-menu {
+  display: none;
+  list-style-type: none;
+}
+
+.dropdown-btn.open + .dropdown-menu {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-item {
+    display: none;
+  }
+
+  .navbar {
+    flex-direction: column;
+  }
+
+  .navbar-item:last-child {
+    margin-top: auto;
+  }
+
+  .dropdown-btn {
+    width: 100%;
+    text-align: left;
+  }
 }

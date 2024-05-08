@@ -4,31 +4,16 @@ import { deleteCart } from "../managers/productmanager.jsx"
 import { removeProductFromOrder } from "../managers/productmanager.jsx"
 import "./cart.css"
 
-export const MyCart = ({ currentUser }) => {
+export const MyCart = () => {
   const [cart, setCart] = useState([])
-  const [cartUser, setCartUser] = useState({
-    user: { first_name: "", last_name: "" },
-    address: "",
-  })
-  //   const [payments, setPayments] = useState([])
-  //   const [showCompleteForm, setShowCompleteForm] = useState(false)
+  // const [cartUser, setCartUser] = useState({
+  //   user: { first_name: "", last_name: "" },
+  //   address: "",
+  // })
 
   useEffect(() => {
-    getCustomerById(currentUser).then((data) => {
-      setCartUser(data)
-      setCart(data.cart || [])
-    })
-  }, [currentUser])
-
-  // useEffect(() => {
-  //   getAllCart().then((cartData) => {
-  //     if (cartData) {
-  //       setCart(cartData.order_products || [])
-  //     } else {
-  //       setCart({})
-  //     }
-  //   })
-  // }, [])
+    getAllCart().then((data) => setCart(data || []))
+  }, [])
 
   // useEffect(() => {
   //   getCustomerById(currentUser).then((data) => {
@@ -134,13 +119,13 @@ export const MyCart = ({ currentUser }) => {
                   </div>
                 ))}
               </div>
-              <div className="user-info">
+              {/* <div className="user-info">
                 <div>User Info: </div>
                 <div>
                   {cartUser.user.first_name} {cartUser.user.last_name}
                   <div>{cartUser.address}</div>
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
             </div>
             <div className="checkout">
               <div>Total Price: ${calculateTotalPrice()}</div>

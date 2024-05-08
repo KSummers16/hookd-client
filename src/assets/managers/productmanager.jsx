@@ -64,6 +64,17 @@ export const getAllCart = () => {
   }).then((res) => res.json())
 }
 
+export const getAllOrders = () => {
+  return fetch(`http://localhost:8000/orders`, {
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "appliation/json",
+    },
+  }).then((res) => res.json())
+}
+
 export const getRTSbyId = (id) => {
   return fetch(`http://localhost:8000/rtsproducts/${id}`, {
     headers: {
@@ -143,7 +154,7 @@ export const removeProductFromOrder = (id) => {
 }
 
 export const deleteRTSItem = (id) => {
-  return fetch(`http://localhose:8000/rtsproducts/${id}`, {
+  return fetch(`http://localhost:8000/rtsproducts/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -155,7 +166,7 @@ export const deleteRTSItem = (id) => {
 }
 
 export const deleteCusItem = (id) => {
-  return fetch(`http://localhose:8000/cusproducts/${id}`, {
+  return fetch(`http://localhost:8000/cusproducts/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${

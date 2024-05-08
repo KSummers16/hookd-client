@@ -14,11 +14,9 @@ export const NavBar = ({ currentUser }) => {
     navigate("/login", { replace: true })
   }
 
-  // useEffect(() => {
-  //   getCustomerById(currentUser).then((data) => {
-  //     setIsAdmin(data.customer.is_admin)
-  //   })
-  // })
+  const handleClick = () => {
+    setShowDropdown(false)
+  }
 
   useEffect(() => {
     getCustomerById(currentUser)
@@ -36,18 +34,26 @@ export const NavBar = ({ currentUser }) => {
     <>
       <ul className="navbar">
         <li className="navbar-item">
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={handleClick}>
+            Home
+          </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/rtsproducts">RTS Items</Link>
+          <Link to="/rtsproducts" onClick={handleClick}>
+            RTS Items
+          </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/cusproducts">Custom Items</Link>
+          <Link to="/cusproducts" onClick={handleClick}>
+            Custom Items
+          </Link>
         </li>
         <li className="navbar-item">
           {/* Dropdown trigger button */}
           <button
-            className="dropdown-btn"
+            className={`dropdown-btn hamburger-btn ${
+              showDropdown ? "open" : ""
+            }`}
             onClick={() => setShowDropdown(!showDropdown)}
           >
             My Options
@@ -56,14 +62,20 @@ export const NavBar = ({ currentUser }) => {
           {isDataFetched && showDropdown && (
             <ul className="dropdown-menu">
               <li className="dropdown-item">
-                <Link to="/cart">Cart</Link>
+                <Link to="/cart" onClick={handleClick}>
+                  Cart
+                </Link>
               </li>
               <li>
-                <Link to="/user">Profile</Link>
+                <Link to="/user" onClick={handleClick}>
+                  Profile
+                </Link>
               </li>
               {isAdmin && (
                 <li className="dropdown-item">
-                  <Link to="/admin">Admin Panel</Link>
+                  <Link to="/admin" onClick={handleClick}>
+                    Admin Panel
+                  </Link>
                 </li>
               )}
               <li className="dropdown-item" onClick={handleLogout}>
@@ -72,7 +84,7 @@ export const NavBar = ({ currentUser }) => {
             </ul>
           )}
         </li>
-        <Link to="/aboutkim">
+        <Link to="/aboutkim" onClick={handleClick}>
           <img
             className="logo"
             src="/images/HookdLogo.png"

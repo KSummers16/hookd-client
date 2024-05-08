@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  border: solid 5px black;
+  border: solid 5px #44edf4;
   margin: 10px;
   width: 250px;
 }
@@ -38,4 +38,31 @@
 
 .price {
   font-size: xx-large;
+}
+
+.product-btn {
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+  line-height: 22px;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  background-image: linear-gradient(
+    to right,
+    rgb(46, 159, 164) 0%,
+    rgb(125, 234, 239) 100%
+  );
+  box-shadow: rgba(0, 0, 0, 0) 5px 37px 15px 5px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
+}
+
+.filter-btn {
+  display: flex;
+  justify-content: space-around;
 }
