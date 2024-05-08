@@ -1,5 +1,10 @@
-import { useState } from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { useState, useEffect, useCallback } from "react"
+import { loadStripe } from "@stripe/stripe-js"
+import {
+  EmbeddedCheckoutProvider,
+  EmbeddedCheckout,
+} from "@stripe/react-stripe-js"
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { Home } from "./assets/pages/home.jsx"
 import { RTSProducts } from "./assets/pages/rtsproducts.jsx"
 import { CusProducts } from "./assets/pages/cusproducts.jsx"
@@ -12,6 +17,7 @@ import { CusDetails } from "./assets/pages/cusdetails.jsx"
 import { MyCart } from "./assets/pages/cart.jsx"
 import { UserProfile } from "./assets/pages/profile.jsx"
 import { Admin } from "./assets/pages/admin.jsx"
+import { AboutKim } from "./assets/pages/aboutKim.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
@@ -41,6 +47,9 @@ function App() {
               element={<UserProfile currentUser={currentUser} />}
             />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/aboutkim" element={<AboutKim />} />
+            {/* <Route path="/checkout" element={<CheckoutForm />} />
+            <Route path="/return" element={<Return />} /> */}
           </Route>
         </Routes>
       </BrowserRouter>

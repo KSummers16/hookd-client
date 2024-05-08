@@ -1,0 +1,15 @@
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+.info {
+  width: 600px;
+}
+
+.socials {
+  display: flex;
+  justify-content: space-between;
+}

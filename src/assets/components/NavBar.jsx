@@ -72,11 +72,13 @@ export const NavBar = ({ currentUser }) => {
             </ul>
           )}
         </li>
-        <img
-          className="logo"
-          src="/images/HookdLogo.png"
-          alt="Hook'd by Kim Logo"
-        />
+        <Link to="/aboutkim">
+          <img
+            className="logo"
+            src="/images/HookdLogo.png"
+            alt="Hook'd by Kim Logo"
+          />{" "}
+        </Link>
       </ul>
     </>
   )

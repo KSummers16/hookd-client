@@ -17,28 +17,6 @@ export const NewCusRequest = ({ currentUser }) => {
   })
   const [showForm, setShowForm] = useState(true)
 
-  // useEffect(() => {
-  //   const fetchOptions = () => {
-  //     const token = currentUser.token
-  //     fetch(`http://localHost:8000/colors`, {
-  //       headers: {
-  //         Authorization: `Token ${token}`,
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => setColorOptions(data))
-
-  //     fetch(`http://localHost:8000/eyes`, {
-  //       headers: {
-  //         Authorization: `Token ${token}`,
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => setEyeOptions(data))
-  //   }
-  //   fetchOptions()
-  // }, [id])
-
   useEffect(() => {
     const fetchOptions = () => {
       fetchColors().then((colorData) => {

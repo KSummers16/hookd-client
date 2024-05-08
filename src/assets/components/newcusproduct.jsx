@@ -2,16 +2,15 @@ import { useEffect, useState } from "react"
 import {
   fetchEyes,
   getAllCategories,
-  addNewRtsProd,
+  addNewCusProd,
 } from "../managers/productmanager.jsx"
 
-export const AddNewRTS = ({ onCloseForm }) => {
+export const AddNewCus = ({ onCloseForm }) => {
   const [eyes, setEyes] = useState([])
   const [categories, setCategories] = useState([])
-  const [rtsProduct, setRtsProduct] = useState({
+  const [cusProduct, setCusProduct] = useState({
     name: "",
     price: "",
-    description: "",
     category_id: "",
     eyes_id: "",
     pattern: "",
@@ -32,7 +31,7 @@ export const AddNewRTS = ({ onCloseForm }) => {
   }, [])
 
   const handleChange = (event) => {
-    const copy = { ...rtsProduct }
+    const copy = { ...cusProduct }
     const { id, value } = event.target
 
     if (id === "price") {
@@ -43,12 +42,12 @@ export const AddNewRTS = ({ onCloseForm }) => {
       copy[id] = value
     }
 
-    setRtsProduct(copy)
+    setCusProduct(copy)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    addNewRtsProd(rtsProduct).then(() => {
+    addNewCusProd(cusProduct).then(() => {
       onCloseForm()
     })
   }
@@ -64,7 +63,7 @@ export const AddNewRTS = ({ onCloseForm }) => {
               autoFocus
               id="name"
               type="text"
-              value={rtsProduct.name}
+              value={cusProduct.name}
               onChange={handleChange}
             />
           </div>
@@ -74,17 +73,7 @@ export const AddNewRTS = ({ onCloseForm }) => {
               required
               id="price"
               type="number"
-              value={rtsProduct.price}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="description">Description</label>
-            <input
-              required
-              id="description"
-              type="text"
-              value={rtsProduct.description}
+              value={cusProduct.price}
               onChange={handleChange}
             />
           </div>
@@ -93,7 +82,7 @@ export const AddNewRTS = ({ onCloseForm }) => {
             <select
               required
               id="category_id"
-              value={rtsProduct.category_id}
+              value={cusProduct.category_id}
               onChange={handleChange}
             >
               <option value="">Select a category</option>
@@ -109,7 +98,7 @@ export const AddNewRTS = ({ onCloseForm }) => {
             <select
               required
               id="eyes_id"
-              value={rtsProduct.eyes_id}
+              value={cusProduct.eyes_id}
               onChange={handleChange}
             >
               <option value="">Select Eyes</option>
@@ -126,7 +115,7 @@ export const AddNewRTS = ({ onCloseForm }) => {
               required
               id="pattern"
               type="text"
-              value={rtsProduct.pattern}
+              value={cusProduct.pattern}
               onChange={handleChange}
             />
           </div>
@@ -136,7 +125,7 @@ export const AddNewRTS = ({ onCloseForm }) => {
               required
               id="yarn"
               type="text"
-              value={rtsProduct.yarn}
+              value={cusProduct.yarn}
               onChange={handleChange}
             />
           </div>
@@ -146,11 +135,11 @@ export const AddNewRTS = ({ onCloseForm }) => {
               required
               id="image"
               type="text"
-              value={rtsProduct.image}
+              value={cusProduct.image}
               onChange={handleChange}
             />
           </div>
-          <button type="submit">Add RTS Product</button>
+          <button type="submit">Add Custom Product</button>
         </fieldset>
       </form>
     </>
