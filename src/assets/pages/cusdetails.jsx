@@ -19,17 +19,6 @@ export const CusDetails = ({ currentUser }) => {
   }
 
   return (
-    // <div>
-    //   <h2>{product.name}</h2>
-    //   <p>${product.price}</p>
-    //   <p>{product.description}</p>
-    //   <p>Pattern by: {product.pattern}</p>
-    //   <p>Made with: {product.yarn}</p>
-    //   <button onClick={() => setShowForm(true)}>Add Custom Request</button>
-    //   {showForm && (
-    //     <NewCusRequest currentUser={currentUser} productId={product.id} />
-    //   )}
-    // </div>
     <div>
       <h2>{product.name}</h2>
       <div className="itemdetails">

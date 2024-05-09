@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
-import { getAllOrders, getCustomerById } from "../managers/productmanager.jsx"
+import {
+  getAllCart,
+  getAllOrders,
+  getCustomerById,
+} from "../managers/productmanager.jsx"
 import "./profile.css"
 
 export const UserProfile = ({ currentUser }) => {
@@ -17,8 +21,19 @@ export const UserProfile = ({ currentUser }) => {
   }, [currentUser])
 
   useEffect(() => {
+    getAllCart().then((cartData) => {
+      if (cartData.order_products) {
+        setCart(cartData.order_products)
+      } else {
+        setCart([])
+      }
+    })
+  }, [])
+
+  useEffect(() => {
     getAllOrders().then((orders) => {
-      setOrders(orders)
+      const paidOrders = orders.filter((order) => order.payment ?? null)
+      setOrders(paidOrders)
     })
   }, [])
 
@@ -61,16 +76,22 @@ export const UserProfile = ({ currentUser }) => {
           {cart.length === 0 ? (
             <div> No items</div>
           ) : (
-            <div> Cart Total : {calculateTotalPrice(cart)}</div>
+            <div> Cart Total : ${calculateTotalPrice(cart)}</div>
           )}
           {/* Place your order-related content here */}
           <div>
             <b>Previous Orders:</b>
-            {orders.map((order) => (
-              <div key={order.id}>
-                {order.id}, Total Price: {calculateTotalPrice(order.items)}
+            {orders.length > 0 ? (
+              <div>
+                {orders.map((order) => (
+                  <div key={order.id}>
+                    {order.id}, Total Price: ${calculateTotalPrice(order.items)}
+                  </div>
+                ))}
               </div>
-            ))}
+            ) : (
+              <div>No Previous Purchases</div>
+            )}
           </div>
           {/* <div></div> */}
         </div>

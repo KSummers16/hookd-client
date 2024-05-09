@@ -4,22 +4,25 @@ import { deleteCart } from "../managers/productmanager.jsx"
 import { removeProductFromOrder } from "../managers/productmanager.jsx"
 import "./cart.css"
 
-export const MyCart = () => {
+export const MyCart = ({ currentUser }) => {
   const [cart, setCart] = useState([])
-  // const [cartUser, setCartUser] = useState({
-  //   user: { first_name: "", last_name: "" },
-  //   address: "",
-  // })
+  const [cartUser, setCartUser] = useState({})
 
   useEffect(() => {
-    getAllCart().then((data) => setCart(data || []))
+    getAllCart().then((cartData) => {
+      if (cartData.order_products) {
+        setCart(cartData.order_products)
+      } else {
+        setCart([])
+      }
+    })
   }, [])
 
-  // useEffect(() => {
-  //   getCustomerById(currentUser).then((data) => {
-  //     setCartUser(data)
-  //   })
-  // }, [currentUser])
+  useEffect(() => {
+    getCustomerById(currentUser).then((data) => {
+      setCartUser(data)
+    })
+  }, [currentUser])
 
   const calculateTotalPrice = () => {
     let totalPrice = 0
@@ -119,13 +122,13 @@ export const MyCart = () => {
                   </div>
                 ))}
               </div>
-              {/* <div className="user-info">
+              <div className="user-info">
                 <div>User Info: </div>
                 <div>
                   {cartUser.user.first_name} {cartUser.user.last_name}
                   <div>{cartUser.address}</div>
-                </div> */}
-              {/* </div> */}
+                </div>
+              </div>
             </div>
             <div className="checkout">
               <div>Total Price: ${calculateTotalPrice()}</div>
