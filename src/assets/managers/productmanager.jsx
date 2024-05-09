@@ -204,7 +204,7 @@ export const addNewRtsProd = (product) => {
 }
 
 export const addNewCusProd = (product) => {
-  return fetch(`http://localhost8000/cusproducts`, {
+  return fetch(`http://localhost:8000/cusproducts`, {
     method: "POST",
     headers: {
       Authorization: `Token ${

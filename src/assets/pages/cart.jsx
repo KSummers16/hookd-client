@@ -113,7 +113,7 @@ export const MyCart = ({ currentUser }) => {
                     )}
                     <div>
                       <button
-                        className="delete"
+                        className="delete-btn"
                         onClick={() => removeProduct(item.id)}
                       >
                         Remove
@@ -123,7 +123,9 @@ export const MyCart = ({ currentUser }) => {
                 ))}
               </div>
               <div className="user-info">
-                <div>User Info: </div>
+                <div>
+                  <b>User Info: </b>
+                </div>
                 <div>
                   {cartUser.user.first_name} {cartUser.user.last_name}
                   <div>{cartUser.address}</div>
@@ -132,8 +134,10 @@ export const MyCart = ({ currentUser }) => {
             </div>
             <div className="checkout">
               <div>Total Price: ${calculateTotalPrice()}</div>
-              <button onClick={handleCartDelete}>Clear Cart</button>
-              <button>Checkout</button>
+              <button className="delete-btn" onClick={handleCartDelete}>
+                Clear Cart
+              </button>
+              <button className="checkout-btn">Checkout</button>
             </div>
           </>
         )}

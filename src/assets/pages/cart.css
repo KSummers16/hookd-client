@@ -10,7 +10,7 @@
 }
 
 .thumbnail {
-  width: 75px;
+  width: 85px;
   height: auto;
   margin: 20px;
 }
@@ -29,6 +29,52 @@
 
 .user-info {
   margin-left: 200px;
-  /* Remove the float rule */
-  /* float: right; */
+  font-size: x-large;
+  border: black 1px solid;
+  padding: 10px;
+}
+
+.checkout-btn {
+  margin: 10px;
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+  line-height: 22px;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  background-image: linear-gradient(
+    to right,
+    rgb(46, 159, 164) 0%,
+    rgb(125, 234, 239) 100%
+  );
+  box-shadow: rgba(0, 0, 0, 0) 5px 37px 15px 5px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
+}
+
+.delete-btn {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  line-height: 16px;
+  padding: 6px;
+  border-radius: 10px;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  background-image: linear-gradient(
+    to right,
+    rgb(226, 53, 39) 0%,
+    rgb(43, 11, 0) 100%
+  );
+  box-shadow: rgba(0, 0, 0, 0) 5px 5px 15px 5px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
 }
