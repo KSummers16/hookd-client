@@ -1,6 +1,9 @@
 import "./aboutKim.css"
+import { ContactMe } from "../components/contactme.jsx"
+import { useState } from "react"
 
 export const AboutKim = () => {
+  const [showForm, setShowForm] = useState(false)
   const handleFacebook = () => {
     window.open(
       `https://www.facebook.com/Hookd-By-Kim-101353409404632`,
@@ -40,6 +43,8 @@ export const AboutKim = () => {
           thus Hook'd by Kim was born! I always like to try new projects, so if
           you don't see something you like...just ask!{" "}
         </p>
+        <button onClick={() => setShowForm(true)}>Contact me!</button>
+        {showForm && <ContactMe />}
       </section>
 
       <h3>Checkout my social sites!</h3>
