@@ -12,7 +12,7 @@ export const Register = () => {
 
   const handleRegister = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:8000/register`, {
+    fetch(`https://coral-app-da9ux.ondigitalocean.app/register`, {
       method: "POST",
       body: JSON.stringify({
         email,
