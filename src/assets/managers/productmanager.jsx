@@ -1,5 +1,5 @@
 export const getAllRTS = () => {
-  return fetch(`http://localhost:8000/rtsproducts`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -10,7 +10,7 @@ export const getAllRTS = () => {
 }
 
 export const fetchColors = () => {
-  return fetch(`http://localhost:8000/colors`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/colors`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -21,7 +21,7 @@ export const fetchColors = () => {
 }
 
 export const fetchEyes = () => {
-  return fetch(`http://localhost:8000/eyes`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/eyes`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -32,7 +32,7 @@ export const fetchEyes = () => {
 }
 
 export const getAllCus = () => {
-  return fetch(`http://localhost:8000/cusproducts`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -43,7 +43,7 @@ export const getAllCus = () => {
 }
 
 export const getAllCategories = () => {
-  return fetch(`http://localhost:8000/category`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/category`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -54,7 +54,7 @@ export const getAllCategories = () => {
 }
 
 export const getAllCart = () => {
-  return fetch(`http://localhost:8000/cart`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -65,7 +65,7 @@ export const getAllCart = () => {
 }
 
 export const getAllOrders = () => {
-  return fetch(`http://localhost:8000/orders`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/orders`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -76,7 +76,7 @@ export const getAllOrders = () => {
 }
 
 export const getRTSbyId = (id) => {
-  return fetch(`http://localhost:8000/rtsproducts/${id}`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts/${id}`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -87,7 +87,7 @@ export const getRTSbyId = (id) => {
 }
 
 export const addRTSToOrder = (product) => {
-  return fetch(`http://localhost:8000/cart`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
@@ -100,7 +100,7 @@ export const addRTSToOrder = (product) => {
 }
 
 export const getCusById = (id) => {
-  return fetch(`http://localhost:8000/cusproducts/${id}`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts/${id}`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -111,7 +111,7 @@ export const getCusById = (id) => {
 }
 
 export const addCusToOrder = (request) => {
-  return fetch(`http://localhost:8000/cart`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
@@ -124,7 +124,7 @@ export const addCusToOrder = (request) => {
 }
 
 export const deleteCart = () => {
-  return fetch(`http://localhost:8000/cart/clear-cart`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart/clear-cart`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -142,7 +142,7 @@ export const deleteCart = () => {
 }
 
 export const removeProductFromOrder = (id) => {
-  return fetch(`http://localhost:8000/cartitem/${id}`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cartitem/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -154,7 +154,7 @@ export const removeProductFromOrder = (id) => {
 }
 
 export const deleteRTSItem = (id) => {
-  return fetch(`http://localhost:8000/rtsproducts/${id}`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -166,7 +166,7 @@ export const deleteRTSItem = (id) => {
 }
 
 export const deleteCusItem = (id) => {
-  return fetch(`http://localhost:8000/cusproducts/${id}`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -178,7 +178,7 @@ export const deleteCusItem = (id) => {
 }
 
 export const getCustomerById = (id) => {
-  return fetch(`http://localhost:8000/customer/${id}`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/customer/${id}`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -191,7 +191,7 @@ export const getCustomerById = (id) => {
 }
 
 export const addNewRtsProd = (product) => {
-  return fetch(`http://localhost:8000/rtsproducts`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
@@ -204,7 +204,7 @@ export const addNewRtsProd = (product) => {
 }
 
 export const addNewCusProd = (product) => {
-  return fetch(`http://localhost:8000/cusproducts`, {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
