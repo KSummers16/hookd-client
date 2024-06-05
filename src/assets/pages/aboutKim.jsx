@@ -38,7 +38,7 @@ export const AboutKim = () => {
           coasters and blankets, and then moved on to amigurumi. I then decided
           to start showing off my products at local craft fairs and on Facebook,
           thus Hook'd by Kim was born! I always like to try new projects, so if
-          you don't see something you like...just ask!{" "}
+          you don't see something you like...just ask!!{" "}
         </p>
       </section>
 
