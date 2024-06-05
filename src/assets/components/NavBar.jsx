@@ -7,7 +7,6 @@ export const NavBar = ({ currentUser }) => {
   const navigate = useNavigate()
   const [showDropdown, setShowDropdown] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
-  const [isDataFetched, setIsDataFetched] = useState(false)
 
   const handleLogout = () => {
     localStorage.removeItem("hookd_token")
@@ -17,20 +16,15 @@ export const NavBar = ({ currentUser }) => {
   const handleClick = () => {
     setShowDropdown(false)
   }
-
   useEffect(() => {
     if (currentUser) {
       getCustomerById(currentUser)
         .then((data) => {
           setIsAdmin(data.is_admin)
-          setIsDataFetched(true)
         })
         .catch((error) => {
           console.error("Error fetching customer data:", error)
-          setIsDataFetched(true)
         })
-    } else {
-      setIsDataFetched(true)
     }
   }, [currentUser])
 
@@ -63,7 +57,7 @@ export const NavBar = ({ currentUser }) => {
             My Options
           </button>
           {/* Dropdown menu */}
-          {isDataFetched && showDropdown && (
+          {showDropdown && (
             <ul className="dropdown-menu">
               {currentUser ? (
                 <>
