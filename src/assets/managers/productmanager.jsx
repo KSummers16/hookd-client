@@ -1,9 +1,6 @@
 export const getAllRTS = () => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts`, {
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json())
@@ -12,9 +9,6 @@ export const getAllRTS = () => {
 export const fetchColors = () => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/colors`, {
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json())
@@ -23,9 +17,6 @@ export const fetchColors = () => {
 export const fetchEyes = () => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/eyes`, {
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json())
@@ -34,9 +25,6 @@ export const fetchEyes = () => {
 export const getAllCus = () => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts`, {
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json())
@@ -45,9 +33,6 @@ export const getAllCus = () => {
 export const getAllCategories = () => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/category`, {
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json())
@@ -78,9 +63,6 @@ export const getAllOrders = () => {
 export const getRTSbyId = (id) => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts/${id}`, {
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json())
@@ -102,9 +84,6 @@ export const addRTSToOrder = (product) => {
 export const getCusById = (id) => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts/${id}`, {
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json())

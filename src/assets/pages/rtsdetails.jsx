@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { addRTSToOrder, getRTSbyId } from "../managers/productmanager.jsx"
 
 export const RTSDetails = () => {
   const { id } = useParams()
+  const navigate = useNavigate()
+  const location = useLocation()
   const [product, setProduct] = useState({})
 
   const addToCart = (productId) => {
-    addRTSToOrder({ rtsproduct_id: productId }).then(() => {
-      alert("Product added to cart!")
-    })
+    if (currentUser) {
+      addRTSToOrder({ rtsproduct_id: productId }).then(() => {
+        alert("Product added to cart!")
+      })
+    } else {
+      navigate("/login", { state: { from: location.pathname } })
+    }
   }
 
   useEffect(() => {

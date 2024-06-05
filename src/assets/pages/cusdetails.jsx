@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getCusById } from "../managers/productmanager.jsx"
 import { NewCusRequest } from "../components/customrequest.jsx"
+import { useNavigate } from "react-router-dom"
 
 export const CusDetails = ({ currentUser }) => {
   const { id } = useParams()
   const [product, setProduct] = useState({})
   const [showForm, setShowForm] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getCusById(id).then((productData) => {
@@ -16,6 +18,14 @@ export const CusDetails = ({ currentUser }) => {
 
   if (!product) {
     return <div>No Product Available</div>
+  }
+
+  const handleAddCustomRequest = () => {
+    if (currentUser) {
+      setShowForm(true)
+    } else {
+      navigate("/login", { state: { from: location.pathname } })
+    }
   }
 
   return (
@@ -40,7 +50,7 @@ export const CusDetails = ({ currentUser }) => {
           <p>
             <b>Made with:</b> {product.yarn}
           </p>
-          <button onClick={() => setShowForm(true)}>Add Custom Request</button>
+          <button onClick={handleAddCustomRequest}>Add Custom Request</button>
           {showForm && (
             <NewCusRequest currentUser={currentUser} productId={product.id} />
           )}

@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { Home } from "./assets/pages/home.jsx"
 import { RTSProducts } from "./assets/pages/rtsproducts.jsx"
 import { CusProducts } from "./assets/pages/cusproducts.jsx"
-import { Authorized } from "./Authorized"
+import { Authorized, Layout } from "./Authorized"
 import "./App.css"
 import { Login } from "./assets/pages/Login.jsx"
 import { Register } from "./assets/pages/register.jsx"
@@ -27,32 +27,34 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route element={<Authorized currentUser={currentUser} />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/rtsproducts" element={<RTSProducts />} />
-            <Route path="/cusproducts" element={<CusProducts />} />
-            <Route path="/rtsproducts/:id" element={<RTSDetails />} />
+          <Route path="/" element={<Layout currentUser={currentUser} />}>
+            <Route index element={<Home />} />
+            <Route path="rtsproducts" element={<RTSProducts />} />
+            <Route path="cusproducts" element={<CusProducts />} />
+            <Route path="rtsproducts/:id" element={<RTSDetails />} />
+            <Route path="aboutkim" element={<AboutKim />} />
             <Route
               path="/cusproducts/:id"
               element={<CusDetails currentUser={currentUser} />}
             />
-            <Route
-              path="/cart"
-              element={<MyCart currentUser={currentUser} />}
-            />
-            \
-            <Route
-              path="/user"
-              element={<UserProfile currentUser={currentUser} />}
-            />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/aboutkim" element={<AboutKim />} />
-            <Route path="/delete" element={<Delete />} />
-            {/* <Route path="/checkout" element={<CheckoutForm />} />
+            <Route element={<Authorized currentUser={currentUser} />}>
+              <Route
+                path="/cart"
+                element={<MyCart currentUser={currentUser} />}
+              />
+              <Route
+                path="/user"
+                element={<UserProfile currentUser={currentUser} />}
+              />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/delete" element={<Delete />} />
+              {/* <Route path="/checkout" element={<CheckoutForm />} />
             <Route path="/return" element={<Return />} /> */}
+            </Route>
           </Route>
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </>

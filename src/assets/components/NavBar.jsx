@@ -19,15 +19,19 @@ export const NavBar = ({ currentUser }) => {
   }
 
   useEffect(() => {
-    getCustomerById(currentUser)
-      .then((data) => {
-        setIsAdmin(data.is_admin)
-        setIsDataFetched(true)
-      })
-      .catch((error) => {
-        console.error("Error fetching customer data:", error)
-        setIsDataFetched(true)
-      })
+    if (currentUser) {
+      getCustomerById(currentUser)
+        .then((data) => {
+          setIsAdmin(data.is_admin)
+          setIsDataFetched(true)
+        })
+        .catch((error) => {
+          console.error("Error fetching customer data:", error)
+          setIsDataFetched(true)
+        })
+    } else {
+      setIsDataFetched(true)
+    }
   }, [currentUser])
 
   return (
@@ -61,26 +65,36 @@ export const NavBar = ({ currentUser }) => {
           {/* Dropdown menu */}
           {isDataFetched && showDropdown && (
             <ul className="dropdown-menu">
-              <li className="dropdown-item">
-                <Link to="/cart" onClick={handleClick}>
-                  Cart
-                </Link>
-              </li>
-              <li>
-                <Link to="/user" onClick={handleClick}>
-                  Profile
-                </Link>
-              </li>
-              {isAdmin && (
+              {currentUser ? (
+                <>
+                  <li className="dropdown-item">
+                    <Link to="/cart" onClick={handleClick}>
+                      Cart
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/user" onClick={handleClick}>
+                      Profile
+                    </Link>
+                  </li>
+                  {isAdmin && (
+                    <li className="dropdown-item">
+                      <Link to="/admin" onClick={handleClick}>
+                        Admin Panel
+                      </Link>
+                    </li>
+                  )}
+                  <li className="dropdown-item" onClick={handleLogout}>
+                    Logout
+                  </li>
+                </>
+              ) : (
                 <li className="dropdown-item">
-                  <Link to="/admin" onClick={handleClick}>
-                    Admin Panel
+                  <Link to="/login" onClick={handleClick}>
+                    Log In
                   </Link>
                 </li>
               )}
-              <li className="dropdown-item" onClick={handleLogout}>
-                Logout
-              </li>
             </ul>
           )}
         </li>

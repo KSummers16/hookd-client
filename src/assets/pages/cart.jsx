@@ -7,13 +7,16 @@ import "./cart.css"
 export const MyCart = ({ currentUser }) => {
   const [cart, setCart] = useState([])
   const [cartUser, setCartUser] = useState({})
+  const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
     getAllCart().then((cartData) => {
       if (cartData.order_products) {
         setCart(cartData.order_products)
+        setTotalPrice(cartData.total_price)
       } else {
         setCart([])
+        setTotalPrice(0)
       }
     })
   }, [])
@@ -23,18 +26,6 @@ export const MyCart = ({ currentUser }) => {
       setCartUser(data)
     })
   }, [currentUser])
-
-  const calculateTotalPrice = () => {
-    let totalPrice = 0
-    cart.forEach((item) => {
-      if (item.rtsproduct_id) {
-        totalPrice += item.rtsproduct.price
-      } else {
-        totalPrice += item.cusrequest.cus_product.price
-      }
-    })
-    return totalPrice
-  }
 
   const handleCartDelete = () => {
     deleteCart().then(() => {
@@ -133,7 +124,7 @@ export const MyCart = ({ currentUser }) => {
               </div>
             </div>
             <div className="checkout">
-              <div>Total Price: ${calculateTotalPrice()}</div>
+              <div>Total Price: ${totalPrice}</div>
               <button className="delete-btn" onClick={handleCartDelete}>
                 Clear Cart
               </button>

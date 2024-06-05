@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 // import "./Login.css"
 
 export const Login = () => {
@@ -7,6 +7,7 @@ export const Login = () => {
   const [password, setPassword] = useState("")
   const existDialog = useRef()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -20,9 +21,12 @@ export const Login = () => {
       .then((res) => res.json())
       .then((authInfo) => {
         if (authInfo.valid) {
-          localStorage.setItem("hookd_token", JSON.stringify(authInfo))
-          localStorage.setItem("id", JSON.stringify)
-          navigate("/")
+          localStorage.setItem("hookd_token", JSON.stringify(authInfo.token))
+          localStorage.setItem("hookd_user", JSON.stringify(authInfo.user))
+
+          const previousUrl = location.state?.from || "/"
+
+          navigate(previousUrl, { replace: true })
         } else {
           existDialog.current.showModal()
         }
