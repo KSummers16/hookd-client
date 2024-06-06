@@ -51,7 +51,7 @@ export const NewCusRequest = ({ currentUser }) => {
 
     const token = currentUser.token
 
-    fetch(`http://localHost:8000/cart`, {
+    fetch(`https://monkfish-app-pi2ii.ondigitalocean.app/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -21,8 +21,8 @@ export const Login = () => {
       .then((res) => res.json())
       .then((authInfo) => {
         if (authInfo.valid) {
-          localStorage.setItem("hookd_token", JSON.stringify(authInfo.token))
-          localStorage.setItem("hookd_user", JSON.stringify(authInfo.user))
+          localStorage.setItem("hookd_token", JSON.stringify(authInfo))
+          localStorage.setItem("id", JSON.stringify)
 
           const previousUrl = location.state?.from || "/"
 
