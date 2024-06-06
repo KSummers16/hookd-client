@@ -31,7 +31,10 @@ function App() {
             <Route index element={<Home />} />
             <Route path="rtsproducts" element={<RTSProducts />} />
             <Route path="cusproducts" element={<CusProducts />} />
-            <Route path="rtsproducts/:id" element={<RTSDetails />} />
+            <Route
+              path="rtsproducts/:id"
+              element={<RTSDetails currentUser={currentUser} />}
+            />
             <Route path="aboutkim" element={<AboutKim />} />
             <Route
               path="/cusproducts/:id"

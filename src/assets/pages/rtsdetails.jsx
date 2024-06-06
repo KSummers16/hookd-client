@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { addRTSToOrder, getRTSbyId } from "../managers/productmanager.jsx"
 
-export const RTSDetails = () => {
+export const RTSDetails = ({ currentUser }) => {
   const { id } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
@@ -50,9 +50,7 @@ export const RTSDetails = () => {
           <p>
             <b>Made with:</b> {product.yarn}
           </p>
-          <button onClick={(event) => addToCart(product.id)}>
-            Add to Cart
-          </button>
+          <button onClick={() => addToCart(product.id)}>Add to Cart</button>
         </div>
       </div>
     </div>

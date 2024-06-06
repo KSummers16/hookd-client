@@ -34,8 +34,20 @@ export const MyCart = ({ currentUser }) => {
   }
 
   const removeProduct = (id) => {
-    removeProductFromOrder(id)
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id))
+    removeProductFromOrder(id).then(() => {
+      setCart((prevCart) => {
+        const updatedCart = prevCart.filter((item) => item.id !== id)
+        const updatedTotalPrice = updatedCart.reduceRight((total, item) => {
+          if (item.rtsproduct_id) {
+            return (total = item.rtsproduct.price)
+          } else {
+            return (total = item.cusrequest.cusproduct.price)
+          }
+        }, 0)
+        setTotalPrice(updatedTotalPrice)
+        return updatedCart
+      })
+    })
   }
 
   return (

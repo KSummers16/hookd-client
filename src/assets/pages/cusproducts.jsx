@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllCategories, getAllCus } from "../managers/productmanager.jsx"
 import { Link } from "react-router-dom"
 
-export const CusProducts = () => {
+export const CusProducts = ({ currentUser }) => {
   const [showCusProducts, setShowCusProducts] = useState([])
   const [category, setCategory] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])

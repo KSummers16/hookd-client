@@ -38,6 +38,23 @@ export const getAllCategories = () => {
   }).then((res) => res.json())
 }
 
+export const getRTSbyId = (id) => {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
+export const getCusById = (id) => {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
+//requires log in
 export const getAllCart = () => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
     headers: {
@@ -60,12 +77,17 @@ export const getAllOrders = () => {
   }).then((res) => res.json())
 }
 
-export const getRTSbyId = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts/${id}`, {
+export const addCusToOrder = (request) => {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
+    method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-type": "application/json",
     },
-  }).then((res) => res.json())
+    body: JSON.stringify(request),
+  })
 }
 
 export const addRTSToOrder = (product) => {
@@ -78,27 +100,6 @@ export const addRTSToOrder = (product) => {
       "Content-type": "application/json",
     },
     body: JSON.stringify(product),
-  })
-}
-
-export const getCusById = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts/${id}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then((res) => res.json())
-}
-
-export const addCusToOrder = (request) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
-    method: "POST",
-    headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(request),
   })
 }
 
@@ -169,6 +170,7 @@ export const getCustomerById = (id) => {
     .then((data) => data)
 }
 
+// admin stuff
 export const addNewRtsProd = (product) => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts`, {
     method: "POST",
