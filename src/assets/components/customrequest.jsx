@@ -51,7 +51,7 @@ export const NewCusRequest = ({ currentUser }) => {
 
     const token = currentUser.token
 
-    fetch(`https://https://coral-app-da9ux.ondigitalocean.app/cart`, {
+    fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
