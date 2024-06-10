@@ -1,6 +1,14 @@
+import { useState } from "react"
 import "./aboutKim.css"
+import { ContactMe } from "../components/contactme.jsx"
 
 export const AboutKim = () => {
+  const [showForm, setShowForm] = useState(false)
+
+  const handleFormSubmitted = () => {
+    setShowForm(false)
+  }
+
   const handleFacebook = () => {
     window.open(
       `https://www.facebook.com/Hookd-By-Kim-101353409404632`,
@@ -28,18 +36,25 @@ export const AboutKim = () => {
           alt="Kim"
           style={{ width: "300px", height: "auto" }}
         />
-        <p className="info">
-          I am 40 years old and am married and have a beautiful daughter. Me and
-          my family live in Tennessee and I like that we are never far from
-          something fun to do out here. I started to crochet because I was
-          always fidgeting with my hands and thought I should give them
-          something to do. In late 2020 I decided to lookup some YouTube videos
-          and slowly but surely taught myself how to crochet. I started with
-          coasters and blankets, and then moved on to amigurumi. I then decided
-          to start showing off my products at local craft fairs and on Facebook,
-          thus Hook'd by Kim was born! I always like to try new projects, so if
-          you don't see something you like...just ask!!{" "}
-        </p>
+        <div className="info">
+          <p>
+            I am 40 years old and am married and have a beautiful daughter. Me
+            and my family live in Tennessee and I like that we are never far
+            from something fun to do out here. I started to crochet because I
+            was always fidgeting with my hands and thought I should give them
+            something to do. In late 2020 I decided to lookup some YouTube
+            videos and slowly but surely taught myself how to crochet. I started
+            with coasters and blankets, and then moved on to amigurumi. I then
+            decided to start showing off my products at local craft fairs and on
+            Facebook, thus Hook'd by Kim was born! I always like to try new
+            projects, so if you don't see something you like...just ask!!{" "}
+          </p>
+          <button className="contactbutton" onClick={() => setShowForm(true)}>
+            Contact Me!
+          </button>
+
+          {showForm && <ContactMe onFormSubmitted={handleFormSubmitted} />}
+        </div>
       </section>
 
       <h3>Checkout my social sites!</h3>
