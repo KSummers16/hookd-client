@@ -3,12 +3,16 @@ import {
   getAllCart,
   getAllOrders,
   getCustomerById,
+  updateUser,
 } from "../managers/productmanager.jsx"
 import "./profile.css"
+import { useNavigate } from "react-router-dom"
 
 export const UserProfile = ({ currentUser }) => {
+  const navigate = useNavigate()
   const [cart, setCart] = useState([])
   const [orders, setOrders] = useState([])
+  const [showForm, setShowForm] = useState(false)
   const [userProfile, setUserProfile] = useState({
     user: { first_name: "", last_name: "", email: "" },
     address: "",
@@ -19,6 +23,19 @@ export const UserProfile = ({ currentUser }) => {
       setUserProfile(data)
     })
   }, [currentUser])
+
+  const handleSave = (event) => {
+    event.preventDefault()
+    const editUser = {
+      id: userProfile.id,
+      first_name: userProfile.first_name,
+      last_name: userProfile.last_name,
+      email: userProfile.email,
+    }
+    updateUser(editUser).then(() => {
+      navigate(`/user`)
+    })
+  }
 
   useEffect(() => {
     getAllCart().then((cartData) => {
@@ -67,6 +84,34 @@ export const UserProfile = ({ currentUser }) => {
             <b>Address:</b>
             {userProfile.address}
           </div>
+          <div>
+            <button onClick={() => setShowForm(true)}>Update Address</button>
+          </div>
+          {showForm && (
+            <form className="editUser">
+              <fieldset>
+                <div>
+                  <label>Update Address:</label>
+                  <input
+                    type="text"
+                    placeholder="New Address"
+                    value={userProfile.address}
+                    onChange={(e) => {
+                      const copy = { ...userProfile }
+                      copy.address = e.target.value
+                      setUserProfile(copy)
+                    }}
+                    required
+                  />
+                </div>
+              </fieldset>
+              <fieldset>
+                <div>
+                  <button onClick={handleSave}>Save Address</button>
+                </div>
+              </fieldset>
+            </form>
+          )}
         </div>
         <div className="profile-section">
           <h2>Your Orders:</h2>

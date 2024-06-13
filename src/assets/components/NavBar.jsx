@@ -18,10 +18,10 @@ export const NavBar = ({ currentUser }) => {
   }
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = () => {
       if (currentUser) {
         try {
-          const userData = await getCustomerById(currentUser)
+          const userData = getCustomerById(currentUser)
           setIsAdmin(userData.is_admin)
         } catch (error) {
           console.error("Error fetching user data:", error)
@@ -56,52 +56,50 @@ export const NavBar = ({ currentUser }) => {
             Custom Items
           </Link>
         </li>
-        <li className="navbar-item">
-          {/* Dropdown trigger button */}
-          <button
-            className={`dropdown-btn hamburger-btn ${
-              showDropdown ? "open" : ""
-            }`}
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            My Options
-          </button>
-          {/* Dropdown menu */}
-          {showDropdown && (
-            <ul className="dropdown-menu">
-              {currentUser ? (
-                <>
-                  <li className="dropdown-item">
-                    <Link to="/cart" onClick={handleClick}>
-                      Cart
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/user" onClick={handleClick}>
-                      Profile
-                    </Link>
-                  </li>
-                  {isAdmin && (
-                    <li className="dropdown-item">
-                      <Link to="/admin" onClick={handleClick}>
-                        Admin Panel
-                      </Link>
-                    </li>
-                  )}
-                  <li className="dropdown-item" onClick={handleLogout}>
-                    Logout
-                  </li>
-                </>
-              ) : (
+        {currentUser ? (
+          <li className="navbar-item">
+            {/* Dropdown trigger button */}
+            <button
+              className={`dropdown-btn hamburger-btn ${
+                showDropdown ? "open" : ""
+              }`}
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              My Options
+            </button>
+            {/* Dropdown menu */}
+            {showDropdown && (
+              <ul className="dropdown-menu">
                 <li className="dropdown-item">
-                  <Link to="/login" onClick={handleClick}>
-                    Log In
+                  <Link to="/cart" onClick={handleClick}>
+                    Cart
                   </Link>
                 </li>
-              )}
-            </ul>
-          )}
-        </li>
+                <li>
+                  <Link to="/user" onClick={handleClick}>
+                    Profile
+                  </Link>
+                </li>
+                {isAdmin && (
+                  <li className="dropdown-item">
+                    <Link to="/admin" onClick={handleClick}>
+                      Admin Panel
+                    </Link>
+                  </li>
+                )}
+                <li className="dropdown-item" onClick={handleLogout}>
+                  Logout
+                </li>
+              </ul>
+            )}
+          </li>
+        ) : (
+          <li className="navbar-item">
+            <Link to="/login" onClick={handleClick}>
+              Log In
+            </Link>
+          </li>
+        )}
         <Link to="/aboutkim" onClick={handleClick}>
           <img
             className="logo"

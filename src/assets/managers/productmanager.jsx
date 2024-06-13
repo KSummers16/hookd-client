@@ -170,6 +170,19 @@ export const getCustomerById = (id) => {
     .then((data) => data)
 }
 
+export const updateUser = (id) => {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/customer/${id}`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
+  })
+}
+
 // admin stuff
 export const addNewRtsProd = (product) => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts`, {
