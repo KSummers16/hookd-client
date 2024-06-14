@@ -10,7 +10,7 @@ export const NavBar = ({ currentUser }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("hookd_token")
-    navigate("/login", { replace: true })
+    navigate("/", { replace: true })
   }
 
   const handleClick = () => {
@@ -30,12 +30,6 @@ export const NavBar = ({ currentUser }) => {
     }
 
     fetchUserData()
-  }, [currentUser])
-
-  useEffect(() => {
-    if (currentUser) {
-      setIsAdmin(currentUser.is_admin)
-    }
   }, [currentUser])
 
   return (
