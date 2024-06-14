@@ -27,10 +27,7 @@ export const UserProfile = ({ currentUser }) => {
   const handleSave = (event) => {
     event.preventDefault()
     const editUser = {
-      id: userProfile.id,
-      first_name: userProfile.first_name,
-      last_name: userProfile.last_name,
-      email: userProfile.email,
+      address: userProfile.address,
     }
     updateUser(editUser).then(() => {
       navigate(`/user`)
