@@ -10,7 +10,12 @@ export const NavBar = ({ currentUser }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("hookd_token")
-    navigate("/", { replace: true })
+
+    if (window.location.pathname === "/") {
+      window.location.reload()
+    } else {
+      navigate("/", { replace: true })
+    }
   }
 
   const handleClick = () => {
