@@ -6,10 +6,8 @@ import {
   updateUser,
 } from "../managers/productmanager.jsx"
 import "./profile.css"
-import { useNavigate } from "react-router-dom"
 
 export const UserProfile = ({ currentUser }) => {
-  const navigate = useNavigate()
   const [cart, setCart] = useState([])
   const [orders, setOrders] = useState([])
   const [showForm, setShowForm] = useState(false)
@@ -27,7 +25,10 @@ export const UserProfile = ({ currentUser }) => {
   const handleSave = (event) => {
     event.preventDefault()
     updateUser(userProfile.id, userProfile.address).then(() => {
-      navigate(`/user`)
+      // Refetch the user data after the update is successful
+      getCustomerById(currentUser).then((data) => {
+        setUserProfile(data)
+      })
     })
   }
 
