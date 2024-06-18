@@ -179,7 +179,7 @@ export const updateUser = (id, address) => {
       }`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(address),
+    body: JSON.stringify({ address }),
   })
 }
 
