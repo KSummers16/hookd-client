@@ -28,6 +28,7 @@ export const UserProfile = ({ currentUser }) => {
       // Refetch the user data after the update is successful
       getCustomerById(currentUser).then((data) => {
         setUserProfile(data)
+        setShowForm(false)
       })
     })
   }
