@@ -35,6 +35,7 @@ export const NavBar = ({ currentUser }) => {
     }
 
     fetchUserData()
+    console.log("Current user:", currentUser)
   }, [currentUser])
 
   return (
