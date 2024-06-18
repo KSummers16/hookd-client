@@ -170,8 +170,8 @@ export const getCustomerById = (id) => {
     .then((data) => data)
 }
 
-export const updateUser = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/customer/${id}`, {
+export const updateUser = (address) => {
+  return fetch(`https://coral-app-da9ux.ondigitalocean.app/customer`, {
     method: "PUT",
     headers: {
       Authorization: `Token ${
@@ -179,7 +179,7 @@ export const updateUser = (id) => {
       }`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(id),
+    body: JSON.stringify(address),
   })
 }
 

@@ -26,10 +26,7 @@ export const UserProfile = ({ currentUser }) => {
 
   const handleSave = (event) => {
     event.preventDefault()
-    const editUser = {
-      address: userProfile.address,
-    }
-    updateUser(editUser).then(() => {
+    updateUser(userProfile.address).then(() => {
       navigate(`/user`)
     })
   }
