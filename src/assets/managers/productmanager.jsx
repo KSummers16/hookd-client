@@ -170,7 +170,7 @@ export const getCustomerById = (id) => {
     .then((data) => data)
 }
 
-export const updateUser = (address, id) => {
+export const updateUser = (id, address) => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/customer/${id}`, {
     method: "PUT",
     headers: {
