@@ -23,10 +23,10 @@ export const NavBar = ({ currentUser }) => {
   }
 
   useEffect(() => {
-    const fetchUserData = () => {
+    const fetchUserData = async () => {
       if (currentUser) {
         try {
-          const userData = getCustomerById(currentUser.user_id)
+          const userData = await getCustomerById(currentUser.user_id)
           console.log("User data:", userData)
           setIsAdmin(userData.is_admin)
         } catch (error) {
