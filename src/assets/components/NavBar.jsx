@@ -26,7 +26,8 @@ export const NavBar = ({ currentUser }) => {
     const fetchUserData = () => {
       if (currentUser) {
         try {
-          const userData = getCustomerById(currentUser)
+          const userData = getCustomerById(currentUser.user_id)
+          console.log("User data:", userData)
           setIsAdmin(userData.is_admin)
         } catch (error) {
           console.error("Error fetching user data:", error)
