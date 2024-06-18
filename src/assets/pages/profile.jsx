@@ -84,7 +84,7 @@ export const UserProfile = ({ currentUser }) => {
             <button onClick={() => setShowForm(true)}>Update Address</button>
           </div>
           {showForm && (
-            <form className="editUser">
+            <form className="editUser" onClick={handleSave}>
               <fieldset>
                 <div>
                   <label>Update Address:</label>
@@ -103,7 +103,7 @@ export const UserProfile = ({ currentUser }) => {
               </fieldset>
               <fieldset>
                 <div>
-                  <button onClick={handleSave}>Save Address</button>
+                  <button type="submit">Save Address</button>
                 </div>
               </fieldset>
             </form>
