@@ -180,6 +180,7 @@ export const updateUser = (id, address) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ address }),
+    timeout: 3000,
   })
 }
 
