@@ -29,6 +29,7 @@ export const UserProfile = ({ currentUser }) => {
       getCustomerById(currentUser).then((data) => {
         setUserProfile(data)
       })
+      console.log(showForm)
       setShowForm(false)
     })
   }
