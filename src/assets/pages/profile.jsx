@@ -15,6 +15,7 @@ export const UserProfile = ({ currentUser }) => {
     user: { first_name: "", last_name: "", email: "" },
     address: "",
   })
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
   useEffect(() => {
     getCustomerById(currentUser).then((data) => {
@@ -28,11 +29,17 @@ export const UserProfile = ({ currentUser }) => {
       // Refetch the user data after the update is successful
       getCustomerById(currentUser).then((data) => {
         setUserProfile(data)
+        setFormSubmitted(true)
+        setShowForm(false)
       })
-      console.log(showForm)
-      setShowForm(false)
     })
   }
+
+  useEffect(() => {
+    if (!showForm) {
+      setFormSubmitted(false) // Reset form submission status when form is closed
+    }
+  }, [showForm])
 
   useEffect(() => {
     getAllCart().then((cartData) => {
@@ -104,7 +111,13 @@ export const UserProfile = ({ currentUser }) => {
               </fieldset>
               <fieldset>
                 <div>
-                  <button type="submit">Save Address</button>
+                  {formSubmitted ? (
+                    <button type="button" onClick={() => setShowForm(false)}>
+                      Close
+                    </button>
+                  ) : (
+                    <button type="submit">Save Address</button>
+                  )}
                 </div>
               </fieldset>
             </form>
