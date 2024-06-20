@@ -66,6 +66,18 @@ export const getAllCart = () => {
   }).then((res) => res.json())
 }
 
+export const completeOrder = () => {
+  return fetch("https://coral-app-da9ux.ondigitalocean.app/cart/complete", {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd-token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  })
+}
+
 export const getAllOrders = () => {
   return fetch(`https://coral-app-da9ux.ondigitalocean.app/orders`, {
     headers: {

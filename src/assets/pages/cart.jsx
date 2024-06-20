@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
-import { getAllCart, getCustomerById } from "../managers/productmanager.jsx"
+import {
+  completeOrder,
+  getAllCart,
+  getCustomerById,
+} from "../managers/productmanager.jsx"
 import { deleteCart } from "../managers/productmanager.jsx"
 import { removeProductFromOrder } from "../managers/productmanager.jsx"
 import "./cart.css"
@@ -20,6 +24,18 @@ export const MyCart = ({ currentUser }) => {
       }
     })
   }, [])
+
+  const handleCheckout = () => {
+    completeOrder()
+      .then(() => {
+        setCart([])
+        setTotalPrice(0)
+        alert("Order placed successfully!")
+      })
+      .catch((error) => {
+        alert("An error occurred while placing the order. Please try again")
+      })
+  }
 
   useEffect(() => {
     getCustomerById(currentUser).then((data) => {
@@ -140,7 +156,9 @@ export const MyCart = ({ currentUser }) => {
               <button className="delete-btn" onClick={handleCartDelete}>
                 Clear Cart
               </button>
-              <button className="checkout-btn">Checkout</button>
+              <button className="checkout-btn" onClick={handleCheckout}>
+                Checkout
+              </button>
             </div>
           </>
         )}
