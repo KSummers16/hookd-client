@@ -71,7 +71,7 @@ export const completeOrder = () => {
     method: "POST",
     headers: {
       Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd-token")).token
+        JSON.parse(localStorage.getItem("hookd_token")).token
       }`,
       "Content-Type": "application/json",
     },
