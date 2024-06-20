@@ -66,15 +66,34 @@ export const getAllCart = () => {
   }).then((res) => res.json())
 }
 
+// export const completeOrder = () => {
+//   return fetch("https://coral-app-da9ux.ondigitalocean.app/cart/complete", {
+//     method: "POST",
+//     headers: {
+//       Authorization: `Token ${
+//         JSON.parse(localStorage.getItem("hookd_token")).token
+//       }`,
+//       "Content-Type": "application/json",
+//     },
+//   })
+// }
+
 export const completeOrder = () => {
+  const token = JSON.parse(localStorage.getItem("hookd_token")).token
+
   return fetch("https://coral-app-da9ux.ondigitalocean.app/cart/complete", {
     method: "POST",
     headers: {
-      Authorization: `Token ${
-        JSON.parse(localStorage.getItem("hookd_token")).token
-      }`,
+      Authorization: `Token ${token}`,
       "Content-Type": "application/json",
     },
+  }).then((response) => {
+    if (!response.ok) {
+      return response.text().then((text) => {
+        throw new Error(text || `HTTP error! status: ${response.status}`)
+      })
+    }
+    return response.json()
   })
 }
 

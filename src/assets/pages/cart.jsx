@@ -45,6 +45,7 @@ export const MyCart = ({ currentUser }) => {
         alert("An error occurred while placing the order. Please try again")
       })
   }
+
   useEffect(() => {
     getCustomerById(currentUser).then((data) => {
       setCartUser(data)
