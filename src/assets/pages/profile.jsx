@@ -53,7 +53,7 @@ export const UserProfile = ({ currentUser }) => {
 
   useEffect(() => {
     getAllOrders().then((orders) => {
-      const paidOrders = orders.filter((order) => order.payment ?? null)
+      const paidOrders = orders.filter((order) => order.emailed ?? true)
       setOrders(paidOrders)
     })
   }, [])
