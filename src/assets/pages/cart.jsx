@@ -28,15 +28,23 @@ export const MyCart = ({ currentUser }) => {
   const handleCheckout = () => {
     completeOrder()
       .then(() => {
-        setCart([])
-        setTotalPrice(0)
+        return getAllCart() // Refetch cart data after completing order
+      })
+      .then((cartData) => {
+        if (cartData.order_products) {
+          setCart(cartData.order_products)
+          setTotalPrice(cartData.total_price)
+        } else {
+          setCart([])
+          setTotalPrice(0)
+        }
         alert("Order placed successfully!")
       })
       .catch((error) => {
+        console.error("Error during checkout:", error)
         alert("An error occurred while placing the order. Please try again")
       })
   }
-
   useEffect(() => {
     getCustomerById(currentUser).then((data) => {
       setCartUser(data)
