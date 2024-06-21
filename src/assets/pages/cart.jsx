@@ -11,15 +11,20 @@ import "./cart.css"
 export const MyCart = ({ currentUser }) => {
   const [cart, setCart] = useState([])
   const [cartUser, setCartUser] = useState({})
+  const [subtotal, setSubtotal] = useState(0)
+  const [shippingCost, setShippingCost] = useState(10)
   const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
     getAllCart().then((cartData) => {
       if (cartData.order_products) {
         setCart(cartData.order_products)
-        setTotalPrice(cartData.total_price)
+        setSubtotal(cartData.subtotal || 0)
+        setShippingCost(cartData.shippingCost || 10)
+        setTotalPrice(cartData.subtotal + cartData.shippingCost || 0)
       } else {
         setCart([])
+        setSubtotal(0)
         setTotalPrice(0)
       }
     })
@@ -28,14 +33,21 @@ export const MyCart = ({ currentUser }) => {
   const handleCheckout = () => {
     completeOrder()
       .then(() => {
+        console.log("Order completed, fetching updated cart")
         return getAllCart() // Refetch cart data after completing order
       })
       .then((cartData) => {
-        if (cartData.order_products) {
+        console.log("Received cart data:", cartData)
+        if (cartData.order_products && cartData.order_products.length > 0) {
+          console.warn("Cart still contains items after checkout")
           setCart(cartData.order_products)
-          setTotalPrice(cartData.total_price)
+          setSubtotal(cartData.subtotal || 0)
+          setShippingCost(cartData.shippingCost || 10)
+          setTotalPrice(cartData.total_price || 0)
         } else {
+          console.log("Cart cleared successfully")
           setCart([])
+          setSubtotal(0)
           setTotalPrice(0)
         }
         alert("Order placed successfully!")
@@ -62,14 +74,15 @@ export const MyCart = ({ currentUser }) => {
     removeProductFromOrder(id).then(() => {
       setCart((prevCart) => {
         const updatedCart = prevCart.filter((item) => item.id !== id)
-        const updatedTotalPrice = updatedCart.reduceRight((total, item) => {
+        const updatedSubtotal = updatedCart.reduceRight((total, item) => {
           if (item.rtsproduct_id) {
             return (total = item.rtsproduct.price)
           } else {
             return (total = item.cusrequest.cusproduct.price)
           }
         }, 0)
-        setTotalPrice(updatedTotalPrice)
+        setSubtotal(updatedSubtotal)
+        setTotalPrice(updatedSubtotal + shippingCost)
         return updatedCart
       })
     })
@@ -161,7 +174,9 @@ export const MyCart = ({ currentUser }) => {
               </div>
             </div>
             <div className="checkout">
-              <div>Total Price: ${totalPrice}</div>
+              <div>Subtotal: ${subtotal.toFixed(2)}</div>
+              <div>Shipping: ${shippingCost.toFixed(2)}</div>
+              <div>Total Price: ${(subtotal + shippingCost).toFixed(2)}</div>
               <button className="delete-btn" onClick={handleCartDelete}>
                 Clear Cart
               </button>
