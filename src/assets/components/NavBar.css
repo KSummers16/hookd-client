@@ -1,23 +1,23 @@
 .navbar {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   background-color: #44edf4;
   margin: 0;
   width: 100%;
   padding: 0.5rem;
   font-family: "Single Day";
   font-size: x-large;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .navbar-item {
-  flex-basis: 20%;
   list-style-type: none;
   color: black;
   font-size: 22px;
   line-height: 22px;
   padding: 15px;
+  margin-right: 10px;
   border-radius: 5px;
   font-family: Georgia, serif;
   font-weight: normal;
@@ -34,6 +34,7 @@
   box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
   border: 2px solid rgb(28, 110, 164);
   display: inline-block;
+  margin-bottom: 10px;
 }
 
 .navbar-item a {
@@ -52,7 +53,7 @@
 .logo {
   width: 125px;
   height: auto;
-  margin-left: 20px;
+  margin-left: auto;
 }
 
 .hamburger-btn {
@@ -102,8 +103,16 @@
 }
 
 @media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .navbar-item {
-    display: none;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+    text-align: center;
   }
 
   .navbar {
@@ -117,5 +126,39 @@
   .dropdown-btn {
     width: 100%;
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navbar-item {
+    flex-basis: auto;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .logo {
+    align-self: flex-end;
+    margin: 10px auto;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    margin: 10px auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+  }
+
+  .dropdown-menu .navbar-item {
+    margin-bottom: 5px;
   }
 }

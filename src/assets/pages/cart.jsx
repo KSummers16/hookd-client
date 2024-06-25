@@ -14,8 +14,10 @@ export const MyCart = ({ currentUser }) => {
   const [subtotal, setSubtotal] = useState(0)
   const [shippingCost, setShippingCost] = useState(10)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setIsLoading(true)
     getAllCart().then((cartData) => {
       if (cartData.order_products) {
         setCart(cartData.order_products)
@@ -27,6 +29,7 @@ export const MyCart = ({ currentUser }) => {
         setSubtotal(0)
         setTotalPrice(0)
       }
+      setIsLoading(false)
     })
   }, [])
 
@@ -34,27 +37,15 @@ export const MyCart = ({ currentUser }) => {
     completeOrder()
       .then(() => {
         console.log("Order completed, fetching updated cart")
+        window.dispatchEvent(new Event("orderCompleted"))
         return getAllCart() // Refetch cart data after completing order
       })
       .then((cartData) => {
         console.log("Received cart data:", cartData)
-        if (cartData.order_products && cartData.order_products.length > 0) {
-          console.warn("Cart still contains items after checkout")
-          setCart(cartData.order_products)
-          setSubtotal(cartData.subtotal || 0)
-          setShippingCost(cartData.shippingCost || 10)
-          setTotalPrice(cartData.total_price || 0)
-        } else {
-          console.log("Cart cleared successfully")
-          setCart([])
-          setSubtotal(0)
-          setTotalPrice(0)
-        }
+        setCart([])
+        setSubtotal(0)
+        setTotalPrice(0)
         alert("Order placed successfully!")
-      })
-      .catch((error) => {
-        console.error("Error during checkout:", error)
-        alert("An error occurred while placing the order. Please try again")
       })
   }
 
@@ -92,7 +83,9 @@ export const MyCart = ({ currentUser }) => {
     <>
       <section>
         <h2>Your Cart</h2>
-        {cart.length === 0 ? (
+        {isLoading ? (
+          <div>Loading your cart...</div>
+        ) : cart.length === 0 ? (
           <>
             <div>There are no items in the cart</div>
             <img
@@ -168,8 +161,8 @@ export const MyCart = ({ currentUser }) => {
                   <b>User Info: </b>
                 </div>
                 <div>
-                  {cartUser.user.first_name} {cartUser.user.last_name}
-                  <div>{cartUser.address}</div>
+                  {cartUser.user?.first_name} {cartUser.user?.last_name}
+                  <div>{cartUser?.address}</div>
                 </div>
               </div>
             </div>

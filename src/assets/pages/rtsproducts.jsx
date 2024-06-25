@@ -10,11 +10,26 @@ export const RTSProducts = () => {
   const [filteredProducts, setFilteredProducts] = useState([])
   const [selectedCategory, setSelectedCategory] = useState("")
 
+  const refreshProductList = () => {
+    getAllRTS().then((RTSarray) => {
+      setShowRtsProducts(RTSarray)
+      setFilteredProducts(RTSarray)
+    })
+  }
+
   useEffect(() => {
     getAllRTS().then((RTSarray) => {
       setShowRtsProducts(RTSarray)
       setFilteredProducts(RTSarray)
     })
+  }, [])
+
+  useEffect(() => {
+    const handlePurchase = () => refreshProductList()
+    window.addEventListener("orderCompleted", handlePurchase)
+    return () => {
+      window.removeEventListener("orderCompleted", handlePurchase)
+    }
   }, [])
 
   useEffect(() => {
