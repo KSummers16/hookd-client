@@ -61,24 +61,59 @@ export const MyCart = ({ currentUser }) => {
     })
   }
 
-  const removeProduct = (id) => {
-    removeProductFromOrder(id).then(() => {
-      setCart((prevCart) => {
-        const updatedCart = prevCart.filter((item) => item.id !== id)
-        const updatedSubtotal = updatedCart.reduceRight((total, item) => {
-          if (item.rtsproduct_id) {
-            return (total = item.rtsproduct.price)
-          } else {
-            return (total = item.cusrequest.cusproduct.price)
-          }
-        }, 0)
-        setSubtotal(updatedSubtotal)
-        setTotalPrice(updatedSubtotal + shippingCost)
-        return updatedCart
-      })
-    })
-  }
+  // const removeProduct = (id) => {
+  //   removeProductFromOrder(id).then(() => {
+  //     setCart((prevCart) => {
+  //       const updatedCart = prevCart.filter((item) => item.id !== id)
+  //       const updatedSubtotal = updatedCart.reduceRight((total, item) => {
+  //         if (item.rtsproduct_id) {
+  //           return (total = item.rtsproduct.price)
+  //         } else {
+  //           return (total = item.cusrequest.cusproduct.price)
+  //         }
+  //       }, 0)
+  //       setSubtotal(updatedSubtotal)
+  //       setTotalPrice(updatedSubtotal + shippingCost)
+  //       return updatedCart
+  //     })
+  //   })
+  // }
 
+  const removeProduct = (id) => {
+    removeProductFromOrder(id)
+      .then(() => {
+        console.log("Product removal request sent successfully")
+      })
+      .catch((error) => {
+        console.log(
+          "Error occurred, but product might still be deleted:",
+          error
+        )
+      })
+      .finally(() => {
+        // Regardless of success or failure, update the cart
+        getAllCart().then((cartData) => {
+          if (!cartData.order_products.some((item) => item.id === id)) {
+            console.log("Product not found in cart, updating UI")
+            setCart((prevCart) => {
+              const updatedCart = prevCart.filter((item) => item.id !== id)
+              const updatedSubtotal = updatedCart.reduce((total, item) => {
+                if (item.rtsproduct_id) {
+                  return total + item.rtsproduct.price
+                } else {
+                  return total + item.cusrequest.cusproduct.price
+                }
+              }, 0)
+              setSubtotal(updatedSubtotal)
+              setTotalPrice(updatedSubtotal + shippingCost)
+              return updatedCart
+            })
+          } else {
+            console.log("Product still in cart, removal may have failed")
+          }
+        })
+      })
+  }
   return (
     <>
       <section>
