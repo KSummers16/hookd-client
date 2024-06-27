@@ -56,9 +56,34 @@ export const MyCart = ({ currentUser }) => {
   }, [currentUser])
 
   const handleCartDelete = () => {
-    deleteCart().then(() => {
-      setCart([])
-    })
+    console.log("Attempting to clear the cart")
+    deleteCart()
+      .then(() => {
+        console.log("Cart deletion request sent successfully")
+      })
+      .catch((error) => {
+        console.log(
+          "Error occurred while clearing cart, but it might still be cleared:",
+          error
+        )
+      })
+      .finally(() => {
+        // Regardless of success or failure, check the cart status
+        getAllCart().then((cartData) => {
+          if (cartData.order_products && cartData.order_products.length === 0) {
+            console.log("Cart is empty, updating UI")
+            setCart([])
+            setSubtotal(0)
+            setTotalPrice(0)
+          } else {
+            console.log("Cart is not empty, clearing may have failed")
+            // Optionally, update the cart with the latest data
+            setCart(cartData.order_products || [])
+            setSubtotal(cartData.subtotal || 0)
+            setTotalPrice((cartData.subtotal || 0) + shippingCost)
+          }
+        })
+      })
   }
 
   // const removeProduct = (id) => {
