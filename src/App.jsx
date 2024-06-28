@@ -31,7 +31,6 @@ function App() {
               <Route path="rtsproducts/:id" element={<RTSDetails />} />
               <Route path="aboutkim" element={<AboutKim />} />
               <Route path="/cusproducts/:id" element={<CusDetails />} />
-              <Route path="/userinfo" element={<UserInfo />} />
               <Route element={<Authorized />}>
                 <Route path="/cart" element={<MyCart />} />
                 <Route path="/user" element={<UserProfile />} />
