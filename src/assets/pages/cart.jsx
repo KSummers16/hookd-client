@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import {
   completeOrder,
   getAllCart,
@@ -7,8 +7,10 @@ import {
 import { deleteCart } from "../managers/productmanager.jsx"
 import { removeProductFromOrder } from "../managers/productmanager.jsx"
 import "./cart.css"
+import { useAuth } from "../components/AuthContext.jsx"
 
-export const MyCart = ({ currentUser }) => {
+export const MyCart = () => {
+  const { currentUser } = useAuth()
   const [cart, setCart] = useState([])
   const [cartUser, setCartUser] = useState({})
   const [subtotal, setSubtotal] = useState(0)
@@ -16,14 +18,16 @@ export const MyCart = ({ currentUser }) => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
+  const fetchCartData = useCallback(() => {
     setIsLoading(true)
     getAllCart().then((cartData) => {
       if (cartData.order_products) {
         setCart(cartData.order_products)
-        setSubtotal(cartData.subtotal || 0)
-        setShippingCost(cartData.shippingCost || 10)
-        setTotalPrice(cartData.subtotal + cartData.shippingCost || 0)
+        const newSubtotal = cartData.subtotal || 0
+        const newShippingCost = cartData.shippingCost || 10
+        setSubtotal(newSubtotal)
+        setShippingCost(newShippingCost)
+        setTotalPrice(newSubtotal + newShippingCost)
       } else {
         setCart([])
         setSubtotal(0)
@@ -33,49 +37,40 @@ export const MyCart = ({ currentUser }) => {
     })
   }, [])
 
+  useEffect(() => {
+    fetchCartData()
+  }, [fetchCartData])
+
+  useEffect(() => {
+    if (currentUser && currentUser.user_id) {
+      getCustomerById(currentUser.user_id).then((data) => {
+        setCartUser(data)
+      })
+    }
+  }, [currentUser])
+
   const handleCheckout = () => {
     completeOrder()
       .then(() => {
         console.log("Order completed, fetching updated cart")
         window.dispatchEvent(new Event("orderCompleted"))
-        return getAllCart() // Refetch cart data after completing order
+        return fetchCartData() // Use fetchCartData instead of getAllCart
       })
-      .then((cartData) => {
-        console.log("Received cart data:", cartData)
-        setCart([])
-        setSubtotal(0)
-        setTotalPrice(0)
+      .then(() => {
         alert("Order placed successfully!")
+        // The cart state should already be updated by fetchCartData
       })
   }
 
-  useEffect(() => {
-    getCustomerById(currentUser).then((data) => {
-      setCartUser(data)
-    })
-  }, [currentUser])
-
   const handleCartDelete = () => {
     deleteCart().then(() => {
-      setCart([])
+      fetchCartData()
     })
   }
 
   const removeProduct = (id) => {
     removeProductFromOrder(id).then(() => {
-      setCart((prevCart) => {
-        const updatedCart = prevCart.filter((item) => item.id !== id)
-        const updatedSubtotal = updatedCart.reduceRight((total, item) => {
-          if (item.rtsproduct_id) {
-            return (total = item.rtsproduct.price)
-          } else {
-            return (total = item.cusrequest.cusproduct.price)
-          }
-        }, 0)
-        setSubtotal(updatedSubtotal)
-        setTotalPrice(updatedSubtotal + shippingCost)
-        return updatedCart
-      })
+      fetchCartData() // Use the fetchCartData function
     })
   }
 
@@ -176,6 +171,15 @@ export const MyCart = ({ currentUser }) => {
               <button className="checkout-btn" onClick={handleCheckout}>
                 Checkout
               </button>
+              <div className="checkoutNote">
+                <em>
+                  <b>*SPECIAL NOTE:*</b>
+                </em>{" "}
+                This website is still in progress. When you click checkout, it
+                will send an email to myself and you with your order. Once I get
+                that email, I will send an invoice to you via paypal. When the
+                invoice is paid I will ship (or start working on) your order
+              </div>
             </div>
           </>
         )}

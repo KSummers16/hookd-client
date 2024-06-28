@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom"
 import { getCusById } from "../managers/productmanager.jsx"
 import { NewCusRequest } from "../components/customrequest.jsx"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../components/AuthContext.jsx"
 
-export const CusDetails = ({ currentUser }) => {
+export const CusDetails = () => {
+  const { currentUser } = useAuth()
   const { id } = useParams()
   const [product, setProduct] = useState({})
   const [showForm, setShowForm] = useState(false)

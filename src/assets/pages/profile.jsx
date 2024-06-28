@@ -6,8 +6,10 @@ import {
   updateUser,
 } from "../managers/productmanager.jsx"
 import "./profile.css"
+import { useAuth } from "../components/AuthContext.jsx"
 
-export const UserProfile = ({ currentUser }) => {
+export const UserProfile = () => {
+  const { currentUser } = useAuth()
   const [cart, setCart] = useState([])
   const [orders, setOrders] = useState([])
   const [showForm, setShowForm] = useState(false)
