@@ -33,7 +33,6 @@ function App() {
               <Route path="/cusproducts/:id" element={<CusDetails />} />
               <Route element={<Authorized />}>
                 <Route path="/cart" element={<MyCart />} />
-                <Route path="/user" element={<UserProfile />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/delete" element={<Delete />} />
                 {/* <Route path="/checkout" element={<CheckoutForm />} />
