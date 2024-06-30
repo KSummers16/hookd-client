@@ -9,12 +9,10 @@ import { Register } from "./assets/pages/register.jsx"
 import { RTSDetails } from "./assets/pages/rtsdetails.jsx"
 import { CusDetails } from "./assets/pages/cusdetails.jsx"
 import { MyCart } from "./assets/pages/cart.jsx"
-import { UserProfile } from "./assets/pages/profile.jsx"
 import { Admin } from "./assets/pages/admin.jsx"
 import { AboutKim } from "./assets/pages/aboutKim.jsx"
 import { Delete } from "./assets/components/deleteproduct.jsx"
 import { AuthProvider } from "./assets/components/AuthContext.jsx"
-import { UserInfo } from "./assets/components/UserInfo.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
