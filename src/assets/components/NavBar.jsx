@@ -2,20 +2,18 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
 import { getCustomerById } from "../managers/productmanager.jsx"
+import { useAuth } from "./AuthContext.jsx"
 
-export const NavBar = ({ currentUser }) => {
+export const NavBar = () => {
   const navigate = useNavigate()
   const [showDropdown, setShowDropdown] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const { currentUser, logout } = useAuth()
 
   const handleLogout = () => {
-    localStorage.removeItem("hookd_token")
-
-    if (window.location.pathname === "/") {
-      window.location.reload()
-    } else {
-      navigate("/", { replace: true })
-    }
+    logout()
+    setShowDropdown(false)
+    navigate("/", { replace: true })
   }
 
   const handleClick = () => {

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useAuth } from "../components/AuthContext.jsx"
 // import "./Login.css"
 
 export const Login = () => {
@@ -8,6 +9,7 @@ export const Login = () => {
   const existDialog = useRef()
   const navigate = useNavigate()
   const location = useLocation()
+  const { login } = useAuth()
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -21,8 +23,7 @@ export const Login = () => {
       .then((res) => res.json())
       .then((authInfo) => {
         if (authInfo.valid) {
-          localStorage.setItem("hookd_token", JSON.stringify(authInfo))
-          localStorage.setItem("id", JSON.stringify)
+          login(authInfo)
 
           const previousUrl = location.state?.from || "/"
 

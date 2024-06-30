@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import {
   completeOrder,
   getAllCart,
@@ -7,8 +7,10 @@ import {
 import { deleteCart } from "../managers/productmanager.jsx"
 import { removeProductFromOrder } from "../managers/productmanager.jsx"
 import "./cart.css"
+import { useAuth } from "../components/AuthContext.jsx"
 
-export const MyCart = ({ currentUser }) => {
+export const MyCart = () => {
+  const { currentUser } = useAuth()
   const [cart, setCart] = useState([])
   const [cartUser, setCartUser] = useState({})
   const [subtotal, setSubtotal] = useState(0)
@@ -16,14 +18,16 @@ export const MyCart = ({ currentUser }) => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
+  const fetchCartData = useCallback(() => {
     setIsLoading(true)
     getAllCart().then((cartData) => {
       if (cartData.order_products) {
         setCart(cartData.order_products)
-        setSubtotal(cartData.subtotal || 0)
-        setShippingCost(cartData.shippingCost || 10)
-        setTotalPrice(cartData.subtotal + cartData.shippingCost || 0)
+        const newSubtotal = cartData.subtotal || 0
+        const newShippingCost = cartData.shippingCost || 10
+        setSubtotal(newSubtotal)
+        setShippingCost(newShippingCost)
+        setTotalPrice(newSubtotal + newShippingCost)
       } else {
         setCart([])
         setSubtotal(0)
@@ -33,111 +37,41 @@ export const MyCart = ({ currentUser }) => {
     })
   }, [])
 
+  useEffect(() => {
+    fetchCartData()
+  }, [fetchCartData])
+
+  useEffect(() => {
+    if (currentUser && currentUser.user_id) {
+      getCustomerById(currentUser.user_id).then((data) => {
+        setCartUser(data)
+      })
+    }
+  }, [currentUser])
+
   const handleCheckout = () => {
     completeOrder()
       .then(() => {
         console.log("Order completed, fetching updated cart")
         window.dispatchEvent(new Event("orderCompleted"))
-        return getAllCart() // Refetch cart data after completing order
+        return fetchCartData() // Use fetchCartData instead of getAllCart
       })
-      .then((cartData) => {
-        console.log("Received cart data:", cartData)
-        setCart([])
-        setSubtotal(0)
-        setTotalPrice(0)
+      .then(() => {
         alert("Order placed successfully!")
+        // The cart state should already be updated by fetchCartData
       })
   }
-
-  useEffect(() => {
-    getCustomerById(currentUser).then((data) => {
-      setCartUser(data)
-    })
-  }, [currentUser])
 
   const handleCartDelete = () => {
-    console.log("Attempting to clear the cart")
-    deleteCart()
-      .then(() => {
-        console.log("Cart deletion request sent successfully")
-      })
-      .catch((error) => {
-        console.log(
-          "Error occurred while clearing cart, but it might still be cleared:",
-          error
-        )
-      })
-      .finally(() => {
-        // Regardless of success or failure, check the cart status
-        getAllCart().then((cartData) => {
-          if (cartData.order_products && cartData.order_products.length === 0) {
-            console.log("Cart is empty, updating UI")
-            setCart([])
-            setSubtotal(0)
-            setTotalPrice(0)
-          } else {
-            console.log("Cart is not empty, clearing may have failed")
-            // Optionally, update the cart with the latest data
-            setCart(cartData.order_products || [])
-            setSubtotal(cartData.subtotal || 0)
-            setTotalPrice((cartData.subtotal || 0) + shippingCost)
-          }
-        })
-      })
+    deleteCart().then(() => {
+      fetchCartData()
+    })
   }
 
-  // const removeProduct = (id) => {
-  //   removeProductFromOrder(id).then(() => {
-  //     setCart((prevCart) => {
-  //       const updatedCart = prevCart.filter((item) => item.id !== id)
-  //       const updatedSubtotal = updatedCart.reduceRight((total, item) => {
-  //         if (item.rtsproduct_id) {
-  //           return (total = item.rtsproduct.price)
-  //         } else {
-  //           return (total = item.cusrequest.cusproduct.price)
-  //         }
-  //       }, 0)
-  //       setSubtotal(updatedSubtotal)
-  //       setTotalPrice(updatedSubtotal + shippingCost)
-  //       return updatedCart
-  //     })
-  //   })
-  // }
-
   const removeProduct = (id) => {
-    removeProductFromOrder(id)
-      .then(() => {
-        console.log("Product removal request sent successfully")
-      })
-      .catch((error) => {
-        console.log(
-          "Error occurred, but product might still be deleted:",
-          error
-        )
-      })
-      .finally(() => {
-        // Regardless of success or failure, update the cart
-        getAllCart().then((cartData) => {
-          if (!cartData.order_products.some((item) => item.id === id)) {
-            console.log("Product not found in cart, updating UI")
-            setCart((prevCart) => {
-              const updatedCart = prevCart.filter((item) => item.id !== id)
-              const updatedSubtotal = updatedCart.reduce((total, item) => {
-                if (item.rtsproduct_id) {
-                  return total + item.rtsproduct.price
-                } else {
-                  return total + item.cusrequest.cusproduct.price
-                }
-              }, 0)
-              setSubtotal(updatedSubtotal)
-              setTotalPrice(updatedSubtotal + shippingCost)
-              return updatedCart
-            })
-          } else {
-            console.log("Product still in cart, removal may have failed")
-          }
-        })
-      })
+    removeProductFromOrder(id).then(() => {
+      fetchCartData() // Use the fetchCartData function
+    })
   }
   return (
     <>
@@ -236,6 +170,15 @@ export const MyCart = ({ currentUser }) => {
               <button className="checkout-btn" onClick={handleCheckout}>
                 Checkout
               </button>
+              <div className="checkoutNote">
+                <em>
+                  <b>*SPECIAL NOTE:*</b>
+                </em>{" "}
+                This website is still in progress. When you click checkout, it
+                will send an email to myself and you with your order. Once I get
+                that email, I will send an invoice to you via paypal. When the
+                invoice is paid I will ship (or start working on) your order
+              </div>
             </div>
           </>
         )}

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { addRTSToOrder, getRTSbyId } from "../managers/productmanager.jsx"
+import { useAuth } from "../components/AuthContext.jsx"
 
-export const RTSDetails = ({ currentUser }) => {
+export const RTSDetails = () => {
+  const { currentUser } = useAuth()
   const { id } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
