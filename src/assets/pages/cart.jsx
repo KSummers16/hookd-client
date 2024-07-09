@@ -99,7 +99,6 @@ export const MyCart = () => {
       .catch((error) => {
         console.error("Error in clear cart process:", error)
         // Even if there's an error, fetch the latest cart data
-        console.log("Fetching cart data despite error in clear cart")
         return fetchCartData()
       })
       .finally(() => {
@@ -107,17 +106,6 @@ export const MyCart = () => {
       })
   }
 
-  // const handleCartDelete = () => {
-  //   deleteCart().then(() => {
-  //     fetchCartData()
-  //   })
-  // }
-
-  // const removeProduct = (id) => {
-  //   removeProductFromOrder(id).then(() => {
-  //     fetchCartData() // Use the fetchCartData function
-  //   })
-  // }
   const removeProduct = (id) => {
     setIsLoading(true)
     removeProductFromOrder(id)
@@ -133,7 +121,7 @@ export const MyCart = () => {
       .catch((error) => {
         console.error("Error in remove product process:", error)
         // Instead of showing an alert, let's fetch the cart data anyway
-        console.log("Fetching cart data despite error")
+
         return fetchCartData()
       })
       .finally(() => {
