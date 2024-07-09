@@ -1,5 +1,8 @@
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://coral-app-da9ux.ondigitalocean.app"
+
 export const getAllRTS = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts`, {
+  return fetch(`${API_URL}/rtsproducts`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -7,7 +10,7 @@ export const getAllRTS = () => {
 }
 
 export const fetchColors = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/colors`, {
+  return fetch(`${API_URL}/colors`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -15,7 +18,7 @@ export const fetchColors = () => {
 }
 
 export const fetchEyes = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/eyes`, {
+  return fetch(`${API_URL}/eyes`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -23,7 +26,7 @@ export const fetchEyes = () => {
 }
 
 export const getAllCus = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts`, {
+  return fetch(`${API_URL}/cusproducts`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -31,7 +34,7 @@ export const getAllCus = () => {
 }
 
 export const getAllCategories = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/category`, {
+  return fetch(`${API_URL}/category`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -39,7 +42,7 @@ export const getAllCategories = () => {
 }
 
 export const getRTSbyId = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts/${id}`, {
+  return fetch(`${API_URL}/rtsproducts/${id}`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -47,7 +50,7 @@ export const getRTSbyId = (id) => {
 }
 
 export const getCusById = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts/${id}`, {
+  return fetch(`${API_URL}/cusproducts/${id}`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -56,7 +59,7 @@ export const getCusById = (id) => {
 
 //requires log in
 export const getAllCart = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
+  return fetch(`${API_URL}/cart`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -66,22 +69,10 @@ export const getAllCart = () => {
   }).then((res) => res.json())
 }
 
-// export const completeOrder = () => {
-//   return fetch("https://coral-app-da9ux.ondigitalocean.app/cart/complete", {
-//     method: "POST",
-//     headers: {
-//       Authorization: `Token ${
-//         JSON.parse(localStorage.getItem("hookd_token")).token
-//       }`,
-//       "Content-Type": "application/json",
-//     },
-//   })
-// }
-
 export const completeOrder = () => {
   const token = JSON.parse(localStorage.getItem("hookd_token")).token
 
-  return fetch("https://coral-app-da9ux.ondigitalocean.app/cart/complete", {
+  return fetch(`${API_URL}/cart/complete`, {
     method: "POST",
     headers: {
       Authorization: `Token ${token}`,
@@ -98,7 +89,7 @@ export const completeOrder = () => {
 }
 
 export const getAllOrders = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/orders`, {
+  return fetch(`${API_URL}/orders`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -109,7 +100,7 @@ export const getAllOrders = () => {
 }
 
 export const addCusToOrder = (request) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
+  return fetch(`${API_URL}/cart`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
@@ -122,7 +113,7 @@ export const addCusToOrder = (request) => {
 }
 
 export const addRTSToOrder = (product) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
+  return fetch(`${API_URL}/cart`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
@@ -135,7 +126,7 @@ export const addRTSToOrder = (product) => {
 }
 
 export const deleteCart = () => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cart/clear-cart`, {
+  return fetch(`${API_URL}/cart/clear-cart`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -153,7 +144,7 @@ export const deleteCart = () => {
 }
 
 export const removeProductFromOrder = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cartitem/${id}`, {
+  return fetch(`${API_URL}/cartitem/${id}`, {
     method: "DELETE",
     credentials: "include",
     headers: {
@@ -206,7 +197,7 @@ export const removeProductFromOrder = (id) => {
 // }
 
 export const deleteRTSItem = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts/${id}`, {
+  return fetch(`${API_URL}/rtsproducts/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -218,7 +209,7 @@ export const deleteRTSItem = (id) => {
 }
 
 export const deleteCusItem = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts/${id}`, {
+  return fetch(`${API_URL}/cusproducts/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Token ${
@@ -230,7 +221,7 @@ export const deleteCusItem = (id) => {
 }
 
 export const getCustomerById = (id) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/customer/${id}`, {
+  return fetch(`${API_URL}/customer/${id}`, {
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
@@ -243,7 +234,7 @@ export const getCustomerById = (id) => {
 }
 
 export const updateUser = (id, address) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/customer/${id}`, {
+  return fetch(`${API_URL}/customer/${id}`, {
     method: "PUT",
     headers: {
       Authorization: `Token ${
@@ -257,7 +248,7 @@ export const updateUser = (id, address) => {
 
 // admin stuff
 export const addNewRtsProd = (product) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/rtsproducts`, {
+  return fetch(`${API_URL}/rtsproducts`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
@@ -270,7 +261,7 @@ export const addNewRtsProd = (product) => {
 }
 
 export const addNewCusProd = (product) => {
-  return fetch(`https://coral-app-da9ux.ondigitalocean.app/cusproducts`, {
+  return fetch(`${API_URL}/cusproducts`, {
     method: "POST",
     headers: {
       Authorization: `Token ${
