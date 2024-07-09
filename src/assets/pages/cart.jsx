@@ -85,10 +85,33 @@ export const MyCart = () => {
   }
 
   const handleCartDelete = () => {
-    deleteCart().then(() => {
-      fetchCartData()
-    })
+    setIsLoading(true)
+    deleteCart()
+      .then(() => {
+        console.log(
+          "Cart deletion API call successful, fetching updated cart data"
+        )
+        return fetchCartData()
+      })
+      .then(() => {
+        console.log("Cart data updated successfully after clearing")
+      })
+      .catch((error) => {
+        console.error("Error in clear cart process:", error)
+        // Even if there's an error, fetch the latest cart data
+        console.log("Fetching cart data despite error in clear cart")
+        return fetchCartData()
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
+
+  // const handleCartDelete = () => {
+  //   deleteCart().then(() => {
+  //     fetchCartData()
+  //   })
+  // }
 
   // const removeProduct = (id) => {
   //   removeProductFromOrder(id).then(() => {

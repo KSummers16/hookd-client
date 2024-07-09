@@ -126,35 +126,26 @@ export const addRTSToOrder = (product) => {
 }
 
 export const deleteCart = () => {
-  return fetch(`${API_URL}/cart/clear-cart`, {
+  return fetch(`${API_URL}/cart`, {
     method: "DELETE",
+    credentials: "include",
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
       }`,
-      "Content-Type": "application/json,",
+      "Content-Type": "application/json",
     },
-  }).then((res) => {
-    if (res.status === 204) {
-      return
-    } else {
-      return res.json()
+  }).then((response) => {
+    if (response.status === 204) {
+      console.log("Cart cleared successfully (204 No Content)")
+      return true
     }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    return response.json()
   })
 }
-
-// export const removeProductFromOrder = (id) => {
-//   return fetch(`${API_URL}/cartitem/${id}`, {
-//     method: "DELETE",
-//     credentials: "include",
-//     headers: {
-//       Authorization: `Token ${
-//         JSON.parse(localStorage.getItem("hookd_token")).token
-//       }`,
-//       "Content-Type": "application/json",
-//     },
-//   })
-// }
 
 export const removeProductFromOrder = (id) => {
   return fetch(`${API_URL}/cartitem/${id}`, {
