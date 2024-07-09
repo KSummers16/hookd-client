@@ -18,19 +18,41 @@ export const MyCart = () => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
+  // const fetchCartData = useCallback(() => {
+  //   setIsLoading(true)
+  //   getAllCart().then((cartData) => {
+  //     if (cartData.order_products) {
+  //       setCart(cartData.order_products)
+  //       const newSubtotal = cartData.subtotal || 0
+  //       const newShippingCost = cartData.shippingCost || 10
+  //       setSubtotal(newSubtotal)
+  //       setShippingCost(newShippingCost)
+  //       setTotalPrice(newSubtotal + newShippingCost)
+  //     } else {
+  //       setCart([])
+  //       setSubtotal(0)
+  //       setTotalPrice(0)
+  //     }
+  //     setIsLoading(false)
+  //   })
+  // }, [])
+
   const fetchCartData = useCallback(() => {
     setIsLoading(true)
     getAllCart().then((cartData) => {
       if (cartData.order_products) {
-        setCart(cartData.order_products)
-        const newSubtotal = cartData.subtotal || 0
-        const newShippingCost = cartData.shippingCost || 10
-        setSubtotal(newSubtotal)
-        setShippingCost(newShippingCost)
-        setTotalPrice(newSubtotal + newShippingCost)
+        setCart((prevCart) => cartData.order_products)
+        setSubtotal((prevSubtotal) => cartData.subtotal || 0)
+        setShippingCost((prevShippingCost) => cartData.shippingCost || 10)
+        setTotalPrice((prevTotalPrice) => {
+          const newSubtotal = cartData.subtotal || 0
+          const newShippingCost = cartData.shippingCost || 10
+          return newSubtotal + newShippingCost
+        })
       } else {
         setCart([])
         setSubtotal(0)
+        setShippingCost(10)
         setTotalPrice(0)
       }
       setIsLoading(false)
@@ -68,11 +90,34 @@ export const MyCart = () => {
     })
   }
 
+  // const removeProduct = (id) => {
+  //   removeProductFromOrder(id).then(() => {
+  //     fetchCartData() // Use the fetchCartData function
+  //   })
+  // }
   const removeProduct = (id) => {
-    removeProductFromOrder(id).then(() => {
-      fetchCartData() // Use the fetchCartData function
-    })
+    setIsLoading(true)
+    removeProductFromOrder(id)
+      .then(() => {
+        console.log(
+          "Product removal API call successful, fetching updated cart data"
+        )
+        return fetchCartData()
+      })
+      .then(() => {
+        console.log("Cart data updated successfully")
+      })
+      .catch((error) => {
+        console.error("Error in remove product process:", error)
+        // Instead of showing an alert, let's fetch the cart data anyway
+        console.log("Fetching cart data despite error")
+        return fetchCartData()
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
+
   return (
     <>
       <section>

@@ -9,9 +9,15 @@ export default defineConfig({
     sourcemap: false,
     minify: "terser",
   },
-  // Server config for both dev and preview
   server: {
-    host: true, // This listens on all available network interfaces
+    host: true,
     port: process.env.PORT || 3000,
+    proxy: {
+      "/api": {
+        target: "https://coral-app-da9ux.ondigitalocean.app",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 })
