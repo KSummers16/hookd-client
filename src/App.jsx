@@ -13,6 +13,7 @@ import { Admin } from "./assets/pages/admin.jsx"
 import { AboutKim } from "./assets/pages/aboutKim.jsx"
 import { Delete } from "./assets/components/deleteproduct.jsx"
 import { AuthProvider } from "./assets/components/AuthContext.jsx"
+import { UserProfile } from "./assets/pages/profile.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
@@ -31,6 +32,7 @@ function App() {
               <Route path="/cusproducts/:id" element={<CusDetails />} />
               <Route element={<Authorized />}>
                 <Route path="/cart" element={<MyCart />} />
+                <Route path="/user" element={<UserProfile />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/delete" element={<Delete />} />
                 {/* <Route path="/checkout" element={<CheckoutForm />} />
