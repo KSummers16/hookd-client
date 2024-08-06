@@ -44,6 +44,11 @@ export const NavBar = () => {
           </Link>
         </li>
         <li className="navbar-item">
+          <Link to="/aboutkim" onClick={handleClick}>
+            About HbK
+          </Link>
+        </li>
+        <li className="navbar-item">
           <Link to="/rtsproducts" onClick={handleClick}>
             RTS Items
           </Link>
@@ -97,13 +102,11 @@ export const NavBar = () => {
             </Link>
           </li>
         )}
-        <Link to="/aboutkim" onClick={handleClick}>
-          <img
-            className="logo"
-            src="/images/HookdLogo.png"
-            alt="Hook'd by Kim Logo"
-          />{" "}
-        </Link>
+        <img
+          className="logo"
+          src="/images/HookdLogo.png"
+          alt="Hook'd by Kim Logo"
+        />{" "}
       </ul>
     </>
   )
