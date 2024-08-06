@@ -18,25 +18,6 @@ export const MyCart = () => {
   const [totalPrice, setTotalPrice] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
 
-  // const fetchCartData = useCallback(() => {
-  //   setIsLoading(true)
-  //   getAllCart().then((cartData) => {
-  //     if (cartData.order_products) {
-  //       setCart(cartData.order_products)
-  //       const newSubtotal = cartData.subtotal || 0
-  //       const newShippingCost = cartData.shippingCost || 10
-  //       setSubtotal(newSubtotal)
-  //       setShippingCost(newShippingCost)
-  //       setTotalPrice(newSubtotal + newShippingCost)
-  //     } else {
-  //       setCart([])
-  //       setSubtotal(0)
-  //       setTotalPrice(0)
-  //     }
-  //     setIsLoading(false)
-  //   })
-  // }, [])
-
   const fetchCartData = useCallback(() => {
     setIsLoading(true)
     getAllCart().then((cartData) => {
@@ -72,15 +53,29 @@ export const MyCart = () => {
   }, [currentUser])
 
   const handleCheckout = () => {
+    console.log("Starting checkout process")
+    console.log("Current cart state:", cart)
+    setIsLoading(true)
     completeOrder()
       .then(() => {
-        console.log("Order completed, fetching updated cart")
+        console.log("Order completed")
         window.dispatchEvent(new Event("orderCompleted"))
-        return fetchCartData() // Use fetchCartData instead of getAllCart
-      })
-      .then(() => {
         alert("Order placed successfully!")
-        // The cart state should already be updated by fetchCartData
+
+        setCart([])
+        setSubtotal(0)
+        setTotalPrice(0)
+      })
+      .catch((error) => {
+        console.error(
+          "Detailed error:",
+          error.response ? error.response.data : error
+        )
+        alert("There was an error completing your order. Please try again")
+      })
+      .finally(() => {
+        setIsLoading(false)
+        fetchCartData()
       })
   }
 

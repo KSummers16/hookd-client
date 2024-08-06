@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   background-color: #44edf4;
   margin: 0;
   width: 100%;
@@ -37,6 +37,15 @@
   margin-bottom: 10px;
 }
 
+.navbar-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  order: 1;
+}
+
 .navbar-item a {
   color: black; /* Set the color to black */
   text-decoration: none; /* Remove underline */
@@ -53,7 +62,7 @@
 .logo {
   width: 125px;
   height: auto;
-  margin-left: auto;
+  order: 2;
 }
 
 .hamburger-btn {
@@ -104,14 +113,23 @@
 
 @media screen and (max-width: 768px) {
   .navbar {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-start;
+  }
+
+  .navbar-buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .logo {
+    margin: 10px 0;
   }
 
   .navbar-item {
     width: 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
+    margin: 5 px 0;
     text-align: center;
   }
 
