@@ -38,10 +38,12 @@ export const AboutKim = () => {
         />
         <div className="info">
           <p>
-            I am 40 years old and am married and have a beautiful daughter. Me
-            and my family live in Tennessee and I like that we are never far
-            from something fun to do out here. I started to crochet because I
-            was always fidgeting with my hands and thought I should give them
+            Hey All! I wanted to tell you a little about myself. I was born in
+            the Chicago area but moved to the south a little over a decade ago.
+            I am married to my wonderful husband and we have a daughter. Me and
+            my family live in Tennessee and I like that we are never far from
+            something fun to do out here. I started to crochet because I was
+            always fidgeting with my hands and thought I should give them
             something to do. In late 2020 I decided to lookup some YouTube
             videos and slowly but surely taught myself how to crochet. I started
             with coasters and blankets, and then moved on to amigurumi. I then
