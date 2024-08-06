@@ -9,7 +9,7 @@ export const Home = () => {
       </div>
 
       <section className="shoppingbody">
-        <div className="rts-select">
+        <div className="rts-select image-container">
           <h3>Ready To Ship Items!</h3>
           <Link to="/rtsproducts">
             <img
@@ -20,7 +20,7 @@ export const Home = () => {
             <div>Shop Now!</div>
           </Link>
         </div>
-        <div className="cus-select">
+        <div className="cus-select image-container">
           <h3>Custom Products!</h3>
           <Link to="/cusproducts">
             <img

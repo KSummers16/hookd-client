@@ -18,6 +18,7 @@ export const UserProfile = () => {
     address: "",
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getCustomerById(currentUser).then((data) => {
@@ -25,18 +26,45 @@ export const UserProfile = () => {
     })
   }, [currentUser])
 
+  // const handleSave = (event) => {
+  //   event.preventDefault()
+  //   updateUser(userProfile.id, userProfile.address).then(() => {
+  //     // Refetch the user data after the update is successful
+  //     getCustomerById(currentUser).then((data) => {
+  //       setUserProfile(data)
+  //       setFormSubmitted(true)
+  //       setShowForm(false)
+  //     })
+  //   })
+  // }
+
   const handleSave = (event) => {
     event.preventDefault()
-    updateUser(userProfile.id, userProfile.address).then(() => {
-      // Refetch the user data after the update is successful
-      getCustomerById(currentUser).then((data) => {
+    setIsLoading(true)
+    updateUser(userProfile.id, userProfile.address)
+      .then(() => {
+        console.log("Update API call completed, fetching latest user data")
+        return getCustomerById(currentUser)
+      })
+      .then((data) => {
         setUserProfile(data)
         setFormSubmitted(true)
         setShowForm(false)
+        console.log("User profile updated successfully")
       })
-    })
+      .catch((error) => {
+        console.error("Error in update process:", error)
+        // Even if there's an error, fetch the latest user data
+        return getCustomerById(currentUser).then((data) => {
+          setUserProfile(data)
+          setFormSubmitted(true)
+          setShowForm(false)
+        })
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
-
   useEffect(() => {
     if (!showForm) {
       setFormSubmitted(false) // Reset form submission status when form is closed
@@ -113,13 +141,12 @@ export const UserProfile = () => {
               </fieldset>
               <fieldset>
                 <div>
-                  {formSubmitted ? (
-                    <button type="button" onClick={() => setShowForm(false)}>
-                      Close
-                    </button>
-                  ) : (
-                    <button type="submit">Save Address</button>
-                  )}
+                  <button type="submit" disabled={isLoading}>
+                    {isLoading ? "Saving..." : "Save Address"}
+                  </button>
+                  <button type="button" onClick={() => setShowForm(false)}>
+                    Cancel
+                  </button>
                 </div>
               </fieldset>
             </form>

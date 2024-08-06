@@ -126,20 +126,24 @@ export const addRTSToOrder = (product) => {
 }
 
 export const deleteCart = () => {
-  return fetch(`${API_URL}/cart/clear-cart`, {
+  return fetch(`${API_URL}/cart`, {
     method: "DELETE",
+    credentials: "include",
     headers: {
       Authorization: `Token ${
         JSON.parse(localStorage.getItem("hookd_token")).token
       }`,
-      "Content-Type": "application/json,",
+      "Content-Type": "application/json",
     },
-  }).then((res) => {
-    if (res.status === 204) {
-      return
-    } else {
-      return res.json()
+  }).then((response) => {
+    if (response.status === 204) {
+      console.log("Cart cleared successfully (204 No Content)")
+      return true
     }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    return response.json()
   })
 }
 
@@ -153,48 +157,17 @@ export const removeProductFromOrder = (id) => {
       }`,
       "Content-Type": "application/json",
     },
+  }).then((response) => {
+    if (response.status === 204) {
+      console.log("Product removed successfully (204 No Content)")
+      return true
+    }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+    return response.json()
   })
 }
-
-// export const removeProductFromOrder = (id) => {
-//   const url = `https://coral-app-da9ux.ondigitalocean.app/cartitem/${id}`
-//   console.log("Sending DELETE request to:", url)
-
-//   return fetch(url, {
-//     method: "DELETE",
-//     credentials: "include",
-//     headers: {
-//       Authorization: `Token ${
-//         JSON.parse(localStorage.getItem("hookd_token")).token
-//       }`,
-//       "Content-Type": "application/json",
-//     },
-//   })
-//     .then((response) => {
-//       console.log("Raw response:", response)
-//       console.log("Response status:", response.status)
-//       console.log("Response OK:", response.ok)
-
-//       // For a successful delete, we expect a 204 No Content response
-//       if (response.status === 204) {
-//         console.log("Delete successful")
-//         return response
-//       }
-
-//       if (!response.ok) {
-//         return response.text().then((text) => {
-//           throw new Error(
-//             `HTTP error! status: ${response.status}, message: ${text}`
-//           )
-//         })
-//       }
-//       return response
-//     })
-//     .catch((error) => {
-//       console.error("Error in removeProductFromOrder:", error)
-//       throw error
-//     })
-// }
 
 export const deleteRTSItem = (id) => {
   return fetch(`${API_URL}/rtsproducts/${id}`, {
