@@ -41,6 +41,22 @@ export const getAllCategories = () => {
   }).then((res) => res.json())
 }
 
+export const getAllCompanys = () => {
+  return fetch(`${API_URL}/companys`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
+export const getAllWeights = () => {
+  return fetch(`${API_URL}/weights`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => res.json())
+}
+
 export const getRTSbyId = (id) => {
   return fetch(`${API_URL}/rtsproducts/${id}`, {
     headers: {
@@ -216,6 +232,31 @@ export const updateUser = (id, address) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ address }),
+  })
+}
+
+export const getAllCustomerYarns = () => {
+  return fetch(`${API_URL}/CustomerYarns`, {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+  }).then((response) => response.json())
+}
+
+export const addCustomerYarn = (customeryarn) => {
+  return fetch(`${API_URL}/customeryarns`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${
+        JSON.parse(localStorage.getItem("hookd_token")).token
+      }`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(customeryarn),
   })
 }
 

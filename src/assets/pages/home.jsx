@@ -32,6 +32,19 @@ export const Home = () => {
           </Link>
         </div>
       </section>
+      <section className="yarnStash">
+        <div className="yarn-select image-container">
+          <h3>Yarn Stash!</h3>
+          <Link to="yarnstash">
+            <img
+              className="YarnStash"
+              src="https://res.cloudinary.com/yarn-stash/image/upload/v1727278102/yarnstash_fjwcxf.jpg"
+              alt="YarnStash"
+            />
+            <div>Keep track of your Stash!</div>
+          </Link>
+        </div>
+      </section>
     </>
   )
 }

@@ -14,6 +14,7 @@ import { AboutKim } from "./assets/pages/aboutKim.jsx"
 import { Delete } from "./assets/components/deleteproduct.jsx"
 import { AuthProvider } from "./assets/components/AuthContext.jsx"
 import { UserProfile } from "./assets/pages/profile.jsx"
+import { YarnStash } from "./assets/pages/yarnstash.jsx"
 
 function App() {
   const localHookdUser = localStorage.getItem("hookd_token")
@@ -28,6 +29,7 @@ function App() {
               <Route path="rtsproducts" element={<RTSProducts />} />
               <Route path="cusproducts" element={<CusProducts />} />
               <Route path="rtsproducts/:id" element={<RTSDetails />} />
+              <Route path="yarnstash" element={<YarnStash />} />
               <Route path="aboutkim" element={<AboutKim />} />
               <Route path="/cusproducts/:id" element={<CusDetails />} />
               <Route element={<Authorized />}>
