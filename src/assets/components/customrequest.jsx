@@ -29,63 +29,6 @@ export const NewCusRequest = ({ currentUser }) => {
     fetchOptions()
   }, [id])
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   console.log("form submitted")
-
-  //   // Destructure request object
-  //   const { cusproduct_id, eyes_id, color1_id, color2_id } = request
-
-  //   // Convert values to integers where necessary
-  //   const requestData = {
-  //     cusproduct_id: cusproduct_id !== "" ? parseInt(cusproduct_id, 10) : null,
-  //     eyes_id: eyes_id !== "" ? parseInt(eyes_id, 10) : null,
-  //     color1_id: color1_id !== "" ? parseInt(color1_id, 10) : null,
-  //     color2_id: color2_id !== "" ? parseInt(color2_id, 10) : null,
-  //     customer_id: currentUser.id,
-  //   }
-
-  //   // Remove color2Id if it's an empty string
-  //   if (requestData.color2_id === "") {
-  //     delete requestData.color2_id
-  //   }
-
-  //   const token = currentUser.token
-  //   console.log("Sending fetch request")
-
-  //   fetch(`https://coral-app-da9ux.ondigitalocean.app/cart`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Token ${token}`,
-  //     },
-  //     body: JSON.stringify(requestData),
-  //   })
-  //   console
-  //     .log("Fetch response received")
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         return response.json()
-  //       } else {
-  //         throw new Error("Failed to submit request")
-  //       }
-  //     })
-  //     .then((data) => {
-  //       console.log("Request successful, about to show alert")
-  //       setSuccessMessage("Request submitted successfully")
-  //       window.alert("Request submitted successfully")
-
-  //       // Reset request state
-  //       setRequest({
-  //         cusproduct_id: id,
-  //         eyes_id: "",
-  //         color1_id: "",
-  //         color2_id: "",
-  //       })
-  //     })
-  //   setShowForm(false)
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
