@@ -19,7 +19,6 @@ export const YarnForm = ({ currentUser, onCloseForm }) => {
   const [baseColors, setBaseColors] = useState([])
   const [companys, setCompanys] = useState([])
   const [weights, setWeights] = useState([])
-  const [showForm, setShowForm] = useState(true)
 
   useEffect(() => {
     const fetchOptions = () => {
@@ -34,23 +33,25 @@ export const YarnForm = ({ currentUser, onCloseForm }) => {
       })
     }
     fetchOptions()
-  }, [id])
+  }, [])
 
   const handleChange = (event) => {
-    const copy = { ...request }
     const { id, value } = event.target
-
-    if (id === "amount") {
-      copy[id] = parseFloat(value)
-    } else if (
-      id === "base_color_id" ||
-      id === "weight_id" ||
-      id === "copmany_id"
-    ) {
-      copy[id] = parseInt(value)
-    } else {
-      copy[id] = value
-    }
+    setRequest((prevRequest) => {
+      const copy = { ...prevRequest }
+      if (id === "amount") {
+        copy[id] = parseFloat(value)
+      } else if (
+        id === "base_color_id" ||
+        id === "weight_id" ||
+        id === "company_id"
+      ) {
+        copy[id] = parseInt(value)
+      } else {
+        copy[id] = value
+      }
+      return copy
+    })
   }
 
   const handleSubmit = (e) => {
@@ -81,9 +82,69 @@ export const YarnForm = ({ currentUser, onCloseForm }) => {
             </select>
           </div>
           <div>
-            <label></label>
+            <label htmlFor="companyId">Company</label>
+            <select
+              required
+              id="company_id"
+              value={request.company_id}
+              onChange={handleChange}
+            >
+              <option value="">Select a company</option>
+              {companys.map((company) => (
+                <option key={company.id} value={company.id}>
+                  {company.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="baseColorId">Base Color</label>
+            <select
+              required
+              id="base_color_id"
+              value={request.base_color_id}
+              onChange={handleChange}
+            >
+              <option value="">Select a base color</option>
+              {baseColors.map((baseColor) => (
+                <option key={baseColor.id} value={baseColor.id}>
+                  {baseColor.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              required
+              id="name"
+              type="text"
+              value={request.name}
+              onChange={handleChange}
+            />
+            <div>
+              <label htmlFor="amount">Amount</label>
+              <input
+                required
+                id="amount"
+                type="number"
+                value={request.amount}
+                onChange={handleChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="colorName">Color Name</label>
+              <select
+                required
+                id="color_name"
+                type="text"
+                value={request.color_name}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </fieldset>
+        <button type="submit">Submit</button>
       </form>
     </>
   )
